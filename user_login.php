@@ -1,8 +1,7 @@
 <?php
 include 'nav_menu_banner.php';
 ?>
-<?
-session_start();?>
+
 
 <div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:right;padding-top:15px;'>
 <script src="bootstrap/js/validator.min.js"></script>
@@ -30,10 +29,24 @@ function draw_login($login_status){
         echo "<input class='form-control' name='user_password' placeholder='输入密码' type=password required>";
       echo "</div>";
       echo "</div>";
+ 
       if ($login_status == 'false'){
         echo "登录信息错误，请重试！";
       }
+/*
+      elseif ($login_status == 'new_login') {
 
+        if (isset($_SESSION['cart_list'])){
+          #echo $_SESSION['cart_list'];
+        }
+        elseif (!(isset($_SESSION['cart_list']))) {
+          # code...
+          header("Location: index.php");
+        }
+
+        # code...
+      }
+*/
       echo "<div class='form-group'>";
       echo "<div class='col-md-8'>";
 
@@ -57,11 +70,58 @@ if (!(isset($_POST['user_email']))){
 }
 elseif (isset($_POST['user_email'])){
   global $db_connect;
+
   $current_user = $_POST['user_email'];
-  $check_user = "SELECT email from user_info where email='$current_user'";
+  $current_password = md5($_POST['user_password']);
+
+  $check_user = "SELECT email,user_password,first_name,last_name from user_info where email='$current_user'";
   $execute_login = mysqli_query($db_connect,$check_user);
-  echo "!!".mysqli_fetch_row($execute_login);
-  draw_login('false');
+  #echo "!!".mysqli_fetch_row($execute_login);
+  $query_user = mysqli_fetch_assoc($execute_login);
+  #echo $current_password;
+  #echo $query_user['email'];
+
+  /////////////// hereunder is the process of login successfully //////////////
+  if ($query_user['email'] == $current_user and $query_user['user_password'] == $current_password)
+  {
+    #echo "ok";
+
+    //////////put email, lastname, firstname into array and push into session ////////
+    $user_account = array($query_user['email'],$query_user['last_name'],$query_user['first_name']);
+    $_SESSION['user_account'] = $user_account;
+    if (isset($_SESSION['cart_list'])){
+          $check_session = $_SESSION['cart_list'];
+          $total_price = 0;
+
+          ////////////go through the cart_list and then decide to redirect to which on page/////////////
+          foreach ($check_session as $single_product){
+            $total_price = $single_product['pro_o_price'] + $total_price;
+
+
+          }
+          ////////// if price is 0 , that means session is empty , redirect to index.php //////////
+          if ($total_price == 0){
+            header("Location: index.php");
+          }
+          ////////// if cart list has item, redirect to shopping cart list and contiune the purchase process ///////////////
+          elseif ($total_price != 0)
+          {
+            header("Location: shopping_cart_list.php");
+
+          }
+          #header("Location: shopping_cart_list.php");
+          #echo $_SESSION['cart_list'];
+        }
+        ///////// if cart list session is not exist, redirect to index.php ///////////////
+        elseif (!(isset($_SESSION['cart_list']))) {
+          # code...
+          header("Location: index.php");
+        }
+
+        # code...
+      
+  }
+  else{draw_login('false');}
 
 }
 

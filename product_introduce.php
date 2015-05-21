@@ -27,7 +27,6 @@ include 'nav_menu_banner.php';
    
 <?php
 
-  session_start();
   //////////////////////////////
   $code = mt_rand(0,1000000);
   $_SESSION['code'] = $code;

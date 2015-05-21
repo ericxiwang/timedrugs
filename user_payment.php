@@ -1,19 +1,35 @@
 <?php
 include 'nav_menu_banner.php';
+require 'draw_shopping_cart.php';
 ?>
 
 <?php
 
-;
-if (!(isset($_SESSION['current_user']))){
+#unset($_SESSION['cart_list']);
+#print_r($_SESSION);
+#session_destroy();
+if (!(isset($_SESSION['user_account']))){
 
 	echo "please login first";
+
+
 }
 else{
 
+	
 
 
 
 
-	echo "hello user!";
+
+	simple_list();
+
+
+
+
+
+	
 }
+
+
+?>

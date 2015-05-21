@@ -3,6 +3,7 @@ ob_start();
 $servername = "localhost";
 // Create connection
 include 'db_cn.php';/////include basic DB connection , db name is inventory////////
+require 'uuid_gen.php';
 ?>
 <html>
 <title>Product management page</title>
@@ -13,24 +14,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 <body>
 
 <?php 
-function getguid(){
-    if (function_exists('com_create_guid')){
-        return com_create_guid();
-    }else{
-        mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
-        $charid = strtoupper(md5(uniqid(rand(), true)));
-        $hyphen = chr(45);// "-"
-        $uuid = #chr(123)// "{"
-            substr($charid, 0, 8).$hyphen
-            .substr($charid, 8, 4).$hyphen
-            .substr($charid,12, 4).$hyphen
-            .substr($charid,16, 4).$hyphen
-            .substr($charid,20,12);
-            #.chr(125);// "}"
-        return $uuid;
 
-    }
-}
 
 
 function pro_upload()
@@ -83,7 +67,7 @@ function pro_upload()
         		echo "The file ". basename( $_FILES["pro_img"]["name"]). " has been uploaded.";
         	///////////////////// basic product info into product_info /////////////////////////////
 
-        		$query_add_pro = "INSERT INTO product_info (pro_name,pro_brand,pro_code) VALUES ('$pro_name','$pro_brand','$UU_ID')";
+        		$query_add_pro = "INSERT INTO product_info (pro_name,pro_brand,pro_code,pro_img) VALUES ('$pro_name','$pro_brand','$UU_ID','$target_file')";
 				$db_execute = mysqli_query($db_connect,$query_add_pro);
 				$query_add_extra_info = "INSERT INTO pro_extra_info (pro_code,pro_img) VALUES ('$UU_ID','$target_file')" ;
 				$db_execute = mysqli_query($db_connect,$query_add_extra_info);

@@ -1,5 +1,7 @@
 <?php
 ob_start();
+session_start();
+
 
 // Create connection
 include 'db_cn.php';/////include basic DB connection , db name is inventory////////
@@ -12,9 +14,9 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-     <link rel="stylesheet" href="bootstrap/css/index.css">
+    <link rel="stylesheet" href="bootstrap/css/index.css">
 
-     <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
 
@@ -35,12 +37,29 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
       <div  style="float:left;padding-left:50px;text-aling:center">欢迎光临好时光保健商城</div>
      
       <div class='top-banner_1 menu_1'>
-        <a href="shopping_cart_list.php"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;查看当前购物车</a>
+        
+        <a href='shopping_cart_list.php'><span class='glyphicon glyphicon-shopping-cart'></span>&nbsp;查看当前购物车</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       
         <a href="user_register.php"><span class="glyphicon glyphicon-user"></span>&nbsp;新顾客注册</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="user_login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;老顾客登录</a>
+
+        <?php
+        if (isset($_SESSION['user_account'])){
+          $current_user = $_SESSION['user_account'];
+
+          echo "<a href='user_login.php'><span class='glyphicon glyphicon-certificate'></span>&nbsp;".$current_user[1]."&nbsp;".$current_user[2]."您好</a>";
+          echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+          echo "<a href='user_logout.php'><span class='glyphicon glyphicon-circle-arrow-down'></span>&nbsp;&nbsp;用户登出</a>";
+
+        }
+        elseif (!isset($_SESSION['user_account'])) {
+          echo  "<a href='user_login.php'><span class='glyphicon glyphicon-log-in'></span>&nbsp;老顾客登录</a>";
+        }
+
+        ?>
+
+       
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;好时光官方微博</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -56,14 +75,26 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
 </div>
 <div class='container'>
-  <div class='col-lg-12 panel panel-danger相关产品' style='height:100px'>好时光logo banner</div>
+  <div class='col-lg-12 panel panel-danger' style="height:20px" >
+   
+
+
+  </div>
+</div>
+<div class='container'>
+  <div class='col-lg-12 panel panel-danger' style="padding:0px" >
+    <img src='image/top.png' style='width:100%'/>
+
+
+
+  </div>
 </div>
 <div class="container">
   <div class="row slider1">
   <div class="col-md-12 col-lg-12">
     <div id="myCarousel" class="carousel slide" style="border:1px solid #000000">
     <!-- 轮播（Carousel）指标 -->
-      <ol class="carousel-indicators">
+      <ol class="carousel-indicators" style="bottom:-10px;">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -71,13 +102,13 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
    <!-- 轮播（Carousel）项目 -->
      <div class="carousel-inner">
         <div class="item active">
-           <img id="slider1" src="image/slide_1.jpg" alt="First slide">
+           <img id="slider1" src="image/slide_1.jpg" alt="First slide" style="width:100%">
         </div>
         <div class="item">
-           <img id="slider1" src="image/image.jpg" alt="Second slide">
+           <img id="slider1" src="image/slide_2.jpg" alt="Second slide" style="width:100%">
         </div>
         <div class="item">
-           <img id="slider1" src="image/image.jpg" alt="Third slide">
+           <img id="slider1" src="image/slide_3.jpg" alt="Third slide" style="width:100%">
         </div>
      </div>
        <!-- 轮播（Carousel）导航
@@ -103,7 +134,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
             <div class="col-lg-12 btn-group menu_row" role="button " aria-label="...">
 
-              <a class="btn btn-danger menu glyphicon glyphicon-globe" role="button" href="http://www.baidu.com">&nbsp;公司首页</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-globe" role="button" href="index.php">&nbsp;公司首页</a>
               <a class="btn btn-danger menu glyphicon glyphicon-thumbs-up" role="button" href="#">&nbsp;精品推荐</a>
               <a class="btn btn-danger menu glyphicon glyphicon-usd" role="button" href="#">&nbsp;促销活动</a>
               <a class="btn btn-danger menu glyphicon glyphicon-th-list" role="button" href="#">&nbsp;产品细分</a>
@@ -138,7 +169,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
         <?php 
         $query_menu = "SELECT id,menu_cate_name from menu_category";
         $query_menu_nav = mysqli_query($db_connect,$query_menu);
-        $query_cate = "SELECT upper_cate,pro_cate_name FROM pro_category";
+        $query_cate = "SELECT upper_cate,pro_cate_name,id FROM pro_category";
         $query_cate_nav = mysqli_query($db_connect,$query_cate);
 
         foreach ($query_menu_nav as $level_1) {
@@ -161,8 +192,10 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
             	if ($level_1['id'] == $level_2['upper_cate'])
             	{
+                $pro_cate = $level_2['id'];
             	
-            	echo "<a data-toggle='collapse' data-parent='#accordion' href='#collapse2'>&nbsp&nbsp".$level_2['pro_cate_name']."&nbsp&nbsp</a>";
+            	echo "<a href='show_pro.php?pro_cate=$pro_cate'>&nbsp&nbsp".$level_2['pro_cate_name']."&nbsp&nbsp</a>";
+              #echo "<a data-toggle='collapse' data-parent='#accordion' href='#collapse2'>&nbsp&nbsp".$level_2['id']."&nbsp&nbsp</a>";
             	
             	 }
 
