@@ -1,6 +1,5 @@
 <?php
 
-
 function draw_chart_list(){
 
 echo "<div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:right;padding-top:15px;'>";
@@ -188,6 +187,7 @@ else
 echo "</form></div>";
 #session_destroy();
 $pro_quantity = 0;
+
 } 
 //end of draw_cart_list function
 

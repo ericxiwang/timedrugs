@@ -1,12 +1,13 @@
 <?php
 include 'nav_menu_banner.php';
-require 'uuid_gen.php'
+require 'uuid_gen.php';
+require 'ord_to_db.php';
 ?>
 <div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:right;padding-top:15px;'>
 <?php
 
-$ord_time = time();
-echo ""
+
+
 
 
 ?>
@@ -28,23 +29,17 @@ echo ""
   </div>
 
 </div>
-
-
-</div>
 <?php
-if (isset($_POST['total_price'])) {
-	echo $_POST['total_price'];
-}
-elseif (!(isset($_POST['total_price']))) {
-	echo "nothing";
-}
+if ((isset($_SESSION['submit_enabled'])) and ($_SESSION['submit_enabled'] == '1')){
 
-echo "<button type='submit'>";
-echo "<img border='0' src='image/paypal.jpg'/>";
-echo "</button>";
-
+ord_to_db()	;
+$_SESSION['submit_enabled']='0';
+}
 
 ?>
+
+</div>
+<button type='submit'><img border='0' src='image/paypal.jpg'/></button>
 
 
 </form>
