@@ -41,7 +41,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
         <a href='shopping_cart_list.php'><span class='glyphicon glyphicon-shopping-cart'></span>&nbsp;查看当前购物车</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       
-        <a href="user_register.php"><span class="glyphicon glyphicon-user"></span>&nbsp;新顾客注册</a>
+        <a href='user_register.php'><span class='glyphicon glyphicon-user'></span>&nbsp;新顾客注册</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <?php

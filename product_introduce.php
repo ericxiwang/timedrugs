@@ -34,7 +34,7 @@ include 'nav_menu_banner.php';
 
 
   $pro_code = $_GET['id'];
-  $pro_query_main = "SELECT pro_name,pro_brand,pro_img,pro_description,pro_code,promotion_id,pro_o_price,promotion_enabled FROM product_info WHERE pro_code ='$pro_code'";
+  $pro_query_main = "SELECT pro_name,pro_brand,pro_img,pro_description,pro_code,promotion_id,pro_o_price,pro_weight,promotion_enabled FROM product_info WHERE pro_code ='$pro_code'";
   $current_product = mysqli_query($db_connect,$pro_query_main);
   $current_product = mysqli_fetch_assoc($current_product);
   $promotion_id_show = $current_product['promotion_id'];
@@ -77,7 +77,8 @@ include 'nav_menu_banner.php';
 
   echo "<li class='list-group-item '><h4>产品名称: ".$current_product['pro_name']."</h4></li>";
   echo "<li class='list-group-item'>产品品牌: ".$current_product['pro_brand']."</li>";
-  echo "<li class='list-group-item'>规格：60粒</li>";
+  echo "<li class='list-group-item'>规格: 60粒</li>";
+  echo "<li class='list-group-item'>邮寄重量: ".$current_product['pro_weight']."公斤</li>";
   #echo "<h4><li class='list-group-item'>零售价格：".$current_product['pro_']"</li>";
   ///////////in terms of promotion_id and promotion_type draw the promotion segement ///////
   if ($show_enable == 'yes'){

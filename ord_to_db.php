@@ -37,6 +37,8 @@ if (isset($_POST['total_price'])) {
 		$db_execute = mysqli_query($db_connect,$add_to_pro_record);
 
 	}
+
+	unset($_SESSION['cart_list']);///////clear session 'cart list' after all products has been submitted into database///////
 	
 	
 }
