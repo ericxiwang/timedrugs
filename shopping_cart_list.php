@@ -161,7 +161,9 @@ if(isset($_POST['originator'])) {
 						$add_to_cart['whole_price'] = $put_into_session[1] * $pro_quantity; //caculate whole price for one product and insert into session
 						$add_to_cart['o_price'] = $put_into_session[2];
 						$add_to_cart['m_price'] = $put_into_session[1];
-						$add_to_cart['pro_weight_all'] = $put_into_session[1] * $pro_quantity;
+						echo "AAAA".$put_into_session[1]."AAAAA";
+						echo "BBBB".$pro_quantity."BBB";
+						$add_to_cart['pro_weight_all'] = $add_to_cart['pro_weight'] * $pro_quantity;
 						array_push($total_list,$add_to_cart);	
 						}
 
@@ -171,7 +173,9 @@ if(isset($_POST['originator'])) {
 
 						$add_to_cart['quantity'] = $put_into_session[2];
 						$add_to_cart['whole_price'] = $add_to_cart['pro_o_price'] * $pro_quantity;
-						$add_to_cart['pro_weight_all'] = $put_into_session[1] * $put_into_session[1];
+
+						echo "@@@".$put_into_session[1];
+						$add_to_cart['pro_weight_all'] = $put_into_session[1] * $add_to_cart['pro_weight'];
 						array_push($total_list,$add_to_cart);	
 
 
