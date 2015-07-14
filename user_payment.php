@@ -1,3 +1,4 @@
+
 <?php
 include 'nav_menu_banner.php';
 require 'draw_shopping_cart.php';

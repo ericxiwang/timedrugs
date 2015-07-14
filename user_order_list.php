@@ -37,39 +37,41 @@ foreach ($db_execute as $db_cursor) {
 
 echo "</form>";
 
-}
-
-if (!(isset($_POST['check_order']))){
-
-	show_order_list();
-}
-
-?>
+} ///////////////function end////////////
 
 
-<?php
+
 
 function selected_order(){
 global $db_connect;
-if (isset($_POST['check_order'])){
+if (isset($_POST['check_order'])){  ////////////////check order is exist means button is clicked ////////////
 
 
 
 $pro_code = $_POST['check_order'];
 
-echo $pro_code;
+//echo "***".$pro_code;
+
+
+
 $query_one_order = "SELECT pro_name,pro_img,pro_price,pro_quantity,pro_amount FROM ord_product WHERE ord_uuid = '$pro_code'";
 $query_one_order = mysqli_query($db_connect,$query_one_order);
 
+$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee FROM ord_record WHERE ord_uuid ='$pro_code' ";
+$order_basic_info = mysqli_query($db_connect,$order_basic_info);
+$order_basic_info = mysqli_fetch_assoc($order_basic_info);
 
 
+
+//echo "<div class='danger'><p>订单编号: ".$pro_code."</p></div>";
 echo "<table class='table  table-bordered table-hover table-condensed' >";
+
 echo "<thead><tr style='width:30px;'><th>产品图片</th>";
 echo "<th>产品名称</th>";
 echo "<th>产品单价</th>";
 echo "<th>产品数量</th>";
 echo "<th>产品总价</th>";
-echo "</tr></thead><tbody>";
+echo "</tr></thead>";
 
 foreach ($query_one_order as $single_product) {
 	
@@ -99,13 +101,33 @@ foreach ($query_one_order as $single_product) {
 
 	# code...
 }
+////////////product list end //////
+echo "<tr><td>邮费:</td><td>$".$order_basic_info['ord_shipping_fee']."</td>";
+echo "<td>订单总价:</td><td colspan=2>$".$order_basic_info['ord_amount']."</td></tr>";
+
+echo "<tr><td>邮寄地址:</td><td colspan=4>".$order_basic_info['ord_address']."</td></tr>";
+
+echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
+echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td>";
+
 echo "</table>";
 echo "<a href='user_order_list.php' role='button' class='btn btn-danger'>返回列表</a>";
 }
 
+}  //////////functino selected order end //////////////
+
+
+
+/////////////////////////////////////////////////
+
+if (!(isset($_POST['check_order']))){
+
+	show_order_list();
 }
 
-selected_order();
+else{
+	selected_order();
+}
 
 ?>
 

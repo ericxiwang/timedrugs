@@ -32,7 +32,7 @@ require 'ord_to_db.php';
 <?php
 if ((isset($_SESSION['submit_enabled'])) and ($_SESSION['submit_enabled'] == '1')){
 
-ord_to_db()	;
+ord_to_db();
 $_SESSION['submit_enabled']='0';
 }
 

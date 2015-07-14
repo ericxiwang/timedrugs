@@ -90,7 +90,6 @@ include 'nav_menu_banner.php';
         $show_discount = $show_promotion_info['discount_value'];
         echo "<li class='list-group-item'>折扣:".$show_discount."％</li>";
         echo "<li class='list-group-item'>零售价格(CAD):".$current_product['pro_o_price']."</li>";
-
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
 
 
@@ -100,7 +99,6 @@ include 'nav_menu_banner.php';
         $show_get = $show_promotion_info['pro_get'];
         echo "<li class='list-group-item'><h4 class='text-danger'>买 ".$show_buy." 赠 ".$show_get."</h4></li>";
         echo "<li class='list-group-item'><h4>零售价格(CAD): "."$".$current_product['pro_o_price']."</h4></li>";
-
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
 
 

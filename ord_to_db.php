@@ -9,14 +9,29 @@ print_r($current_user);
 #global $current_user[1],$current_user[2];
 
 
-if (isset($_POST['total_price'])) {
-	$ord_amount = $_POST['total_price'];
+
+if (isset($_POST['hidden_amount'])) {
+	#print_r($_POST['hidden_amount']);
+	
+	$ord_amount = $_POST['hidden_amount'];
 	$ord_code = getguid();
 	################### insert into ##################
+	//print_r($current_user);
 	$ord_user = $current_user[1]." ".$current_user[2];
-	$ord_email = $current_user['0'];
-	echo $ord_email;
-	$add_to_ord_record = "INSERT INTO ord_record (ord_uuid,ord_datetime,ord_amount,ord_status,ord_user,ord_email) VALUES ('$ord_code',now(),'$ord_amount','new','$ord_user','$ord_email')";
+	$ord_email = $current_user[0];
+	#echo $ord_email;
+	//////////////get user mailing address post code and full name
+	
+	$mailing_address = $_POST['full_address'];
+	$mailing_address = urldecode($mailing_address);
+	//echo $mailing_address;
+
+
+	$post_code = $_POST['post_code'];
+	//$full_name = $_POST['full_name'];
+
+	$add_to_ord_record = "INSERT INTO ord_record (ord_uuid,ord_datetime,ord_amount,ord_status,ord_user,ord_email,ord_address,ord_postcode) 
+						VALUES ('$ord_code',now(),'$ord_amount','new','$ord_user','$ord_email','$mailing_address','$post_code')";
 
 	$db_execute = mysqli_query($db_connect,$add_to_ord_record);
 	#echo "hha";
@@ -26,6 +41,8 @@ if (isset($_POST['total_price'])) {
 
 
 	foreach ($_SESSION['cart_list'] as $show_each) {
+
+		echo "##".$show_each['pro_type'];
 
 
 		#echo $show_each['pro_name']." ".$show_each['pro_img']." ".$show_each['pro_o_price']." ".$show_each['quantity']."" .$show_each['pro_code']." ".$show_each['whole_price']."<br/>";
@@ -43,7 +60,7 @@ if (isset($_POST['total_price'])) {
 	
 }
 elseif (!(isset($_POST['total_price']))) {
-	echo "";
+	echo "no data received";
 }
 
 

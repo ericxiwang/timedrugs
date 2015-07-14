@@ -1,6 +1,41 @@
+<script type="text/javascript">
+function final_amount(){
+	//var shipping_t = get_shipping_fee;
+	var shipping_radio = document.getElementsByName('shipping_fee');
+	// alert(eless[i].checked+eless[i].name+eless[i].id); 
+	for(var i=0;i<shipping_radio.length;i++) { 
+		// alert(eless[i].checked+eless[i].name+eless[i].id); 
+		if(shipping_radio[i].checked) 
+		{ 
+		var shipping_radio = shipping_radio[i].value;
+		break; 
+		} 
+	} 
+
+	var get_tax_rate = (document.getElementById('tax_rate').value)*0.01 + 1; //// tax rate is here
+
+	var get_goods_fee = document.getElementById('total_price').value;	///all product before tax
+
+
+	var final_return = ((parseInt(get_goods_fee)*get_tax_rate) + parseInt(shipping_radio)*1.12).toFixed(1);
+
+	document.getElementById("final_pay").innerHTML = final_return;
+	document.getElementById("hidden_amount").value = final_return;
+	document.getElementById("submit").disabled = false;
+	
+
+	
+
+
+}
+
+
+</script>
+
 <?php
 /////////////////////////////////////// function for tax and shipping fee calculate as follow ////////////////
 function tax_rate_shipping_fee($country){
+
 
 global $db_connect;
 $current_country = $country;
@@ -31,7 +66,7 @@ return array($load_tax_rate['tax_rate'],$load_shipping_fee);
 function draw_chart_list(){
 
 echo "<div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:right;padding-top:15px;'>";
-echo "<form action = 'user_payment.php' method='POST'>";
+echo "<form action = 'user_payment.php' method='POST' enctype='multipart/form-data'>";
 
 echo "<table class='table  table-bordered table-hover table-condensed'>";
 echo "<thead><tr style='width:30px;'><th>产品图片</th>";
@@ -156,6 +191,7 @@ echo "<div class='col-md-9 col-lg-9 panel panel-danger product_list' style='floa
 /////////////////// attenation: this form is used to direct to final payment page which name is order_confirm.php ////////////////
 
 echo "<form action='order_confirm.php' method='POST'>";
+//echo "<form action='order_confirm.php' method='POST' enctype='multipart/form-data'>";
 echo "<table class='table  table-bordered table-hover table-condensed'>";
 echo "<thead><tr><th >产品图片</th>";
 echo "<th>产品名称</th>";
@@ -172,6 +208,7 @@ if (isset($_SESSION['user_account'])){
 
 #echo count($_SESSION['cart_list']);
 if (isset($_SESSION['cart_list'])){
+	print_r($_SESSION['cart_list']);
 
 $total_price = 0;
 $total_weight = 0;
@@ -180,7 +217,7 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 	$total_price = $total_price + $single_product['whole_price'];
 	
 	$total_weight = $total_weight + $single_product['pro_weight_all'];
-	echo "#####".$total_weight;
+
 	echo "<tr>";
 		echo "<td style='width:120px;'>";//产品图片列
 			echo" <img src='$single_product[pro_img]' height=80 width=80/>";
@@ -233,47 +270,81 @@ $query_user = mysqli_query($db_connect,$query_user);
 $query_user  = mysqli_fetch_assoc($query_user);
 //////////////////////////////////////// load end //////////////////////////
 $tax_shipping_display = tax_rate_shipping_fee($query_user['user_country']);
+echo "<input type='hidden' id='tax_rate' value='$tax_shipping_display[0]'>";
 
 
 
 
 
 
-$total_price = number_format($total_price*(1+floatval($tax_shipping_display[0])/100),1);
 
-echo "<tr>";
-echo "<td colspan=3 style='text-align:right'>税率:".$tax_shipping_display[0]."%";
-echo "<td colspan=3 style='text-align:right'>税后商品总额:$".$total_price;
-
-echo "</tr>";
 
 
 
 echo "<tr>";
 echo "<td colspan=2 style='text-align:right'>商品总重量: ".$total_weight."公斤</td>";
-if ($query_user['user_country'] == 'Canada') {
-	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
+echo "<td colspan=4 style='text-align:right'>商品税前总价: $".$total_price;
+echo "<input type='hidden' id = 'total_price' value='$total_price'>";
+echo "</tr>";
+function draw_radio($user_country_input,$tax_shipping_display_input,$total_weight)
 
-	foreach ($tax_shipping_display[1] as $shipping_method) {
+{
+	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
+	
+
+	$user_country = $user_country_input;
+	$tax_shipping_display = $tax_shipping_display_input;
+
+	foreach ($tax_shipping_display as $shipping_method) {
+
+		///////////////////// basic shipping ///////////
 		
 		if ($shipping_method['shipping_type'] == 'common'){
 		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];//////普通平邮邮费计算
+			if ($total_weight <=1 ){
+				$shipping_fee_option = $shipping_method['shipping_basefee'];
 		
-		echo "<input type='radio' name = 'shipping_fee'>普通平邮 $ ".$shipping_fee_option;
+
+
+			}
+			else if ($total_weight > 1){
+				$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];//////普通平邮邮费计算
+		
+
+
+			}
+			else{
+
+				echo "no one matched";
+			}
+		
+		
+		echo "<input type='radio' onClick='final_amount()' id ='common' name = 'shipping_fee' value='$shipping_fee_option'>普通平邮 $ ".$shipping_fee_option;
 		echo "</div>";
 		}
+
+		//////////////////////////extra shipping ///////////
 		elseif ($shipping_method['shipping_type'] == 'extra'){
+
 		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];/////特快专递邮费计算
-		echo "<input type='radio' name = 'shipping_fee'>特快专递 $ ".$shipping_fee_option;
+		
+			if ($total_weight <= 1){
+			$shipping_fee_option = $shipping_method['shipping_basefee'];
+
+			}
+			else if ($total_weight > 1){
+			$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];/////特快专递邮费计算
+
+			}
+		echo "<input type='radio' onClick='final_amount()' id ='extra' name = 'shipping_fee' value='$shipping_fee_option'>特快专递 $ ".$shipping_fee_option;
+		
 		echo "</div>";
 		}
-		
 	}
 
-
-
+}
+if ($query_user['user_country'] == 'Canada') {
+	draw_radio('Canada',$tax_shipping_display[1],$total_weight);
 
 	echo "</td>";
 }
@@ -282,81 +353,45 @@ if ($query_user['user_country'] == 'Canada') {
 elseif($query_user['user_country'] == 'China'){
 	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
 
-	foreach ($tax_shipping_display[1] as $shipping_method) {
-		
-		if ($shipping_method['shipping_type'] == 'common'){
-		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
-		
-		echo "<input type='radio' name = 'shipping_fee'>普通平邮 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-		elseif ($shipping_method['shipping_type'] == 'extra'){
-		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
-		echo "<input type='radio' name = 'shipping_fee'>特快专递 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-		
-	}
-
-
-
+	draw_radio('China',$tax_shipping_display[1],$total_weight);
 
 	echo "</td>";
 }
 elseif($query_user['user_country'] == 'USA'){
 	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
 
-	foreach ($tax_shipping_display[1] as $shipping_method) {
-		
-		if ($shipping_method['shipping_type'] == 'common'){
-		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
-		
-		echo "<input type='radio' name = 'shipping_fee'>普通平邮 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-		elseif ($shipping_method['shipping_type'] == 'extra'){
-		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
-		echo "<input type='radio' name = 'shipping_fee'>特快专递 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-		
+	draw_radio('USA',$tax_shipping_display[1],$total_weight);
+
+		echo "</td>";
 	}
+
+	/*elseif($query_user['user_country'] == 'other'){
+		echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
+
+		foreach ($tax_shipping_display[1] as $shipping_method) {
+			
+			if ($shipping_method['shipping_type'] == 'common'){
+			echo "<div class='radio'>";
+			$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
+			
+			echo "<input type='radio' name = 'shipping_fee' value=$shipping_fee_option>普通平邮 $ ".$shipping_fee_option;
+			echo "</div>";
+			}
+			elseif ($shipping_method['shipping_type'] == 'extra'){
+			echo "<div class='radio'>";
+			$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
+			echo "<input type='radio' name = 'shipping_fee' value=$shipping_fee_option>特快专递 $ ".$shipping_fee_option;
+			echo "</div>";
+			}
+			
+		}
 
 
 
 
 	echo "</td>";
 }
-elseif($query_user['user_country'] == 'other'){
-	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
-
-	foreach ($tax_shipping_display[1] as $shipping_method) {
-		
-		if ($shipping_method['shipping_type'] == 'common'){
-		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
-		
-		echo "<input type='radio' name = 'shipping_fee'>普通平邮 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-		elseif ($shipping_method['shipping_type'] == 'extra'){
-		echo "<div class='radio'>";
-		$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];
-		echo "<input type='radio' name = 'shipping_fee'>特快专递 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-		
-	}
-
-
-
-
-	echo "</td>";
-}
+*/
 else
 {
 	echo "error";
@@ -364,9 +399,21 @@ else
 
 echo "</tr>";
 
+$total_price = number_format($total_price*(1+floatval($tax_shipping_display[0])/100),1);
+
+//echo "<td colspan=3 style='text-align:right'>税率:".$tax_shipping_display[0]."%";
+//echo "<td colspan=3 style='text-align:right'>税后商品总额:$".$total_price;
+
+echo "</tr>";
+echo "<tr>";
+	echo "<td colspan=6>";
+	echo "<p id = 'final_pay' ></p>";
+	echo "<input name = 'hidden_amount' id = 'hidden_amount' type='hidden' value=''/>";
+	echo "</td>";
+echo "</tr>";
 
 
-echo "<input type=hidden id='total_price' name = 'total_price' value='$total_price'/>";
+//echo "<input type=hidden id='total_price' name = 'total_price' value='$total_price'/>";
 echo "<tr><td colspan=6 style='text-align:center'>请您确认收件人信息和地址</td></tr>";
 
 
@@ -386,7 +433,7 @@ echo "<td>邮寄地址</td>";
 echo "<td colspan=2>".$query_user['user_mailing_address']."</td></tr>";
 
 echo "<tr><td colspan=6 style='text-align:center'>";
-echo  "<button type='submit' class='btn btn-danger glyphicon glyphicon glyphicon-ok' style='height:50px;margin-right:20px'>&nbsp;提交订单</button>";
+echo  "<button id='submit' type='submit' class='btn btn-danger glyphicon glyphicon glyphicon-ok' style='height:50px;margin-right:20px' disabled >&nbsp;提交订单</button>";
 
 
 
@@ -401,6 +448,17 @@ echo "</td></tr>";
 
 echo "</tbody>";
 echo "</table>";
+$full_name = strval($current_user_info[1]) . strval($current_user_info[2]);
+echo "<input name='full_name' type = hidden value = $full_name>";
+#echo "<input type = hidden value = $query_user['user_country']>";
+echo $query_user['user_mailing_address'];
+$full_address = $query_user['user_country']." ".$query_user['user_province']." ".$query_user['user_mailing_address'];  /////////// generate full address string ///////////
+
+$full_address = urlencode($full_address);
+
+
+echo "<input name = 'full_address' type = hidden value = $full_address>";
+echo "<input name = 'post_code' type = hidden value = $query_user[user_postcode]>";
 }
 else
 {
@@ -411,6 +469,7 @@ else
 }
 #echo $v_data;
 #echo "<a href='index.php'>back to index</a>";
+
 echo "</form></div>";
 #session_destroy();
 $pro_quantity = 0;
