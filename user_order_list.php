@@ -54,7 +54,7 @@ $pro_code = $_POST['check_order'];
 
 
 
-$query_one_order = "SELECT pro_name,pro_img,pro_price,pro_quantity,pro_amount FROM ord_product WHERE ord_uuid = '$pro_code'";
+$query_one_order = "SELECT pro_name,pro_img,pro_o_price,pro_m_price,pro_quantity,pro_amount,pro_pro_type FROM ord_product WHERE ord_uuid = '$pro_code'";
 $query_one_order = mysqli_query($db_connect,$query_one_order);
 
 $order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee FROM ord_record WHERE ord_uuid ='$pro_code' ";
@@ -83,7 +83,17 @@ foreach ($query_one_order as $single_product) {
 			echo $single_product['pro_name'];
 		echo "</td>";
 		echo "<td>";//产品单价列
-			echo $single_product['pro_price'];
+		if ($single_product['pro_pro_type'] == '1'){
+			
+			echo "<del>$".$single_product['pro_o_price']."</del>";
+			echo "<br/>";
+			echo "$".$single_product['pro_m_price'];
+
+		}
+		else{
+			echo "$".$single_product['pro_o_price'];
+
+		}
 		echo "</td>";
 		echo "<td>";//购买数量列
 			#echo $single_product['pro_code'];

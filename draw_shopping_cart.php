@@ -91,14 +91,14 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 		echo "</td>";
 		echo "<td>";//产品单价列
 
-			if(isset($single_product['m_price'])){
+			if($single_product['pro_type'] == '1'){
 				echo "<del>$".$single_product['o_price']."</del><br/>";
 				echo "$".$single_product['m_price']."<br/>";
 
 			}
 
 			
-			elseif (!(isset($single_product['m_price']))){
+			elseif ($single_product['pro_type'] == '2'){
 
 			echo $single_product['pro_o_price'];
 			}
@@ -208,7 +208,7 @@ if (isset($_SESSION['user_account'])){
 
 #echo count($_SESSION['cart_list']);
 if (isset($_SESSION['cart_list'])){
-	print_r($_SESSION['cart_list']);
+
 
 $total_price = 0;
 $total_weight = 0;
@@ -226,14 +226,14 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 			echo $single_product['pro_name'];
 		echo "</td>";
 		echo "<td>";//产品单价列
-			if(isset($single_product['m_price'])){
+			if($single_product['pro_type'] == '1'){
 				echo "<del>$".$single_product['o_price']."</del><br/>";
 				echo "$".$single_product['m_price']."<br/>";
 
 			}
 
 
-			elseif (!(isset($single_product['m_price']))){
+			elseif ($single_product['pro_type'] == '2'){
 
 			echo $single_product['pro_o_price'];
 			}

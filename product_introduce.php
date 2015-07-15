@@ -91,6 +91,7 @@ include 'nav_menu_banner.php';
         echo "<li class='list-group-item'>折扣:".$show_discount."％</li>";
         echo "<li class='list-group-item'>零售价格(CAD):".$current_product['pro_o_price']."</li>";
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
+       // echo "<input type='hidden' value = '1' name = 'pro_type'>";
 
 
         break;
@@ -100,6 +101,7 @@ include 'nav_menu_banner.php';
         echo "<li class='list-group-item'><h4 class='text-danger'>买 ".$show_buy." 赠 ".$show_get."</h4></li>";
         echo "<li class='list-group-item'><h4>零售价格(CAD): "."$".$current_product['pro_o_price']."</h4></li>";
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
+        //echo "<input type='hidden' value = '2' name = 'pro_type'>";
 
 
 
@@ -109,6 +111,7 @@ include 'nav_menu_banner.php';
         echo "<li class='list-group-item'><del class='text-danger'>零售价格(CAD): "."$".$current_product['pro_o_price']."</del></li>";
         echo "<li class='list-group-item'><h4 class='text-success'>优惠价格(CAD): "."$".$show_price."</h4></li>";
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
+        //echo "<input type='hidden' value = '3' name = 'pro_type'>";
         
         break;
     }
