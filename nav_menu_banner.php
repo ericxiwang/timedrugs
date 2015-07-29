@@ -137,7 +137,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
               <a class="btn btn-danger menu glyphicon glyphicon-globe" role="button" href="index.php">&nbsp;公司首页</a>
               <a class="btn btn-danger menu glyphicon glyphicon-thumbs-up" role="button" href="#">&nbsp;精品推荐</a>
               <a class="btn btn-danger menu glyphicon glyphicon-usd" role="button" href="#">&nbsp;促销活动</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-th-list" role="button" href="#">&nbsp;产品细分</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-gift" role="button" href="pro_whole_sale_page.php">&nbsp;批发包邮</a>
               <a class="btn btn-danger menu glyphicon glyphicon-heart-empty" role="button" href="#">&nbsp;健康咨询</a>
               <a class="btn btn-danger menu glyphicon glyphicon-map-marker" role="button" href="#">&nbsp;经销网店</a>
               <a class="btn btn-danger menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>

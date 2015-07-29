@@ -23,7 +23,7 @@ else{
 
 
 
-print_r($_SESSION['cart_list']);
+//print_r($_SESSION['cart_list']);
 	simple_list();
 
 

@@ -16,14 +16,11 @@ include 'promotion_function.php';
       <!-- one inventory unit -->
 
      <?php
-     $query_all_pro  = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where pro_onsell='1' and whole_sale ='0' ";
+     $query_all_pro  = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where pro_onsell='1' and whole_sale='1'";
      $all_products = mysqli_query($db_connect,$query_all_pro);
-     
 
      show_product($all_products);
-
      
-
      ?>
     
       

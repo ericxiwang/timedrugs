@@ -86,16 +86,16 @@ include 'nav_menu_banner.php';
 
     switch ($show_promotion_info['pro_type'])
     {
-      case '1'://discount
+      case '1':////////////////////////////// discount ///////////////////////////////
         $show_discount = $show_promotion_info['discount_value'];
         echo "<li class='list-group-item'>折扣:".$show_discount."％</li>";
-        echo "<li class='list-group-item'>零售价格(CAD):".$current_product['pro_o_price']."</li>";
+        echo "<li class='list-group-item'>零售价格(CAD):$".$current_product['pro_o_price']."</li>";
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
        // echo "<input type='hidden' value = '1' name = 'pro_type'>";
 
 
         break;
-      case '2'://buy and get
+      case '2':////////////////////////////////buy and get //////////////////////////////
         $show_buy = $show_promotion_info['pro_buy'];
         $show_get = $show_promotion_info['pro_get'];
         echo "<li class='list-group-item'><h4 class='text-danger'>买 ".$show_buy." 赠 ".$show_get."</h4></li>";
@@ -106,7 +106,7 @@ include 'nav_menu_banner.php';
 
 
         break;
-      case '3'://speical price
+      case '3':////////////////////////////////speical price //////////////////////////////
         $show_price = $show_promotion_info['pro_price'];
         echo "<li class='list-group-item'><del class='text-danger'>零售价格(CAD): "."$".$current_product['pro_o_price']."</del></li>";
         echo "<li class='list-group-item'><h4 class='text-success'>优惠价格(CAD): "."$".$show_price."</h4></li>";
@@ -114,6 +114,21 @@ include 'nav_menu_banner.php';
         //echo "<input type='hidden' value = '3' name = 'pro_type'>";
         
         break;
+
+      case '4':////////////////////////////////free shipping //////////////////////////////
+        $show_price = $show_promotion_info['pro_price'];
+        echo "<li class='list-group-item'><h4>零售价格(CAD): "."$".$current_product['pro_o_price']."</h4></li>";
+        echo "<li class='list-group-item'><h3 class='text-danger'>免运费</h3></li>";
+        echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
+        //echo "<input type='hidden' value = '3' name = 'pro_type'>";
+        
+        break;
+
+
+
+
+
+
     }
 
   }
@@ -134,7 +149,7 @@ include 'nav_menu_banner.php';
           <button class='btn btn-danger btn-xs' id='min'  name='' type='button' value='-'' />-</button>
           <input id='text_box' name='text_box' type='text' value='1' size='3' readonly/>
           <button class='btn btn-danger btn-xs' id='add' name='' type='button' value='+'' />+</button>
-          <!--<p>总价(不含税和运费)：<label id='total'></label></p>-->
+         
         </div>";
   echo "<div class='col-md-5 col-lg-5'>
           <button type='submit' class='btn btn-danger glyphicon glyphicon-shopping-cart' style='height:50px;margin-right:20px'>&nbsp;加入购物车</button>
@@ -146,7 +161,7 @@ include 'nav_menu_banner.php';
 
       </div>  
       <div class='col-md-9 col-lg-9 panel panel-danger product_des'>相关产品</div>  
-      <div class='col-md-9 col-lg-9 panel panel-danger product_des'>相关</div> 
+
       <div class='col-md-9 col-lg-9 panel panel-danger product_des'>用户反馈</div>  
       
      

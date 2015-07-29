@@ -31,8 +31,25 @@ if (isset($_POST['hidden_amount'])) {
 	//$full_name = $_POST['full_name'];
 	$shipping_fee = $_POST['shipping_fee'];
 
-	$add_to_ord_record = "INSERT INTO ord_record (ord_uuid,ord_datetime,ord_amount,ord_status,ord_user,ord_email,ord_address,ord_postcode,ord_shipping_fee) 
-						VALUES ('$ord_code',now(),'$ord_amount','new','$ord_user','$ord_email','$mailing_address','$post_code','$shipping_fee')";
+	$add_to_ord_record = "INSERT INTO ord_record 
+								(ord_uuid,
+									ord_datetime,
+									ord_amount,
+									ord_status,
+									ord_user,
+									ord_email,
+									ord_address,
+									ord_postcode,
+									ord_shipping_fee) 
+						VALUES ('$ord_code',
+									now(),
+									'$ord_amount',
+									'new',
+									'$ord_user',
+									'$ord_email',
+									'$mailing_address',
+									'$post_code',
+									'$shipping_fee')";
 
 	$db_execute = mysqli_query($db_connect,$add_to_ord_record);
 	#echo "hha";

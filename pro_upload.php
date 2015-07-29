@@ -4,6 +4,7 @@ $servername = "localhost";
 // Create connection
 include 'db_cn.php';/////include basic DB connection , db name is inventory////////
 require 'uuid_gen.php';
+
 ?>
 <html>
 <title>Product management page</title>

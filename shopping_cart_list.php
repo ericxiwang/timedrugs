@@ -11,6 +11,7 @@ if (isset($_GET['product_id'])){
 	#echo "$$$".$_GET['product_id'];
 
 	$Load_session = $_SESSION['cart_list'];
+
 	
 	foreach ( $Load_session as $one_array => $array ) {
 		#echo $array['pro_code'].'++++++++'.$_GET['product_id'];
@@ -47,8 +48,10 @@ function check_promotion($current_id,$current_quantity,$current_price){
 	global $db_connect;
 
 
-
+		/////////////////////////////////////////////////////////////
 		/////////////// go to check table pro_discount //////////////
+		/////////////////////////////////////////////////////////////
+
 	$check_promotion_table = "SELECT discount_value,pro_buy,pro_get,pro_type,pro_price,dis_enabled from pro_discount where promotion_id ='$current_id' ";
 	$check_promotion_table = mysqli_query($db_connect,$check_promotion_table);
 	$check_promotion_table = mysqli_fetch_assoc($check_promotion_table);
@@ -78,13 +81,13 @@ function check_promotion($current_id,$current_quantity,$current_price){
 	        $promotion_result = intval($current_quantity) + $real_get*$show_get;   //// return the quantity includes get items//////
 
 
-	        if ($real_get =='0'){
+	        if ($real_get =='0'){	
 	        	$promotion_display = $current_quantity;
 
 
 	        }
 	        else{
-	        	$promotion_display = $current_quantity." + ".$real_get*$show_get;
+	        	$promotion_display = $current_quantity." + ".$real_get*$show_get; //display such as n + 1 effect
 	        
 
 			}
@@ -99,6 +102,20 @@ function check_promotion($current_id,$current_quantity,$current_price){
 	        $show_price = $check_promotion_table['pro_price'];
 	         
 	        break;
+
+
+
+
+	      case '4': // free shipping
+	      	$promotion_result = $current_price; //assign price to varible
+	      	$promotion_display = 0;
+
+
+	      	return array($check_promotion_table['pro_type'],$promotion_result,$promotion_display);
+
+	      	break;
+
+
 	    }
 
 		
@@ -109,6 +126,7 @@ function check_promotion($current_id,$current_quantity,$current_price){
 
 
 }
+///////////////////////////////////////////////////////////////
 ////////////////////// check promotion end ////////////////////
 if (isset($_POST['text_box'])){
 $pro_quantity = $_POST['text_box']; // get order quantity without promotion
@@ -136,18 +154,19 @@ if(isset($_POST['originator'])) {
 				$total_list = array();
 
 				/////////////////////////// invoke check promotion function //////////////////////
-				if (isset($_POST['notice_promotion'])){
+				/*if (isset($_POST['notice_promotion'])){
 				
 					$current_promotion = $_POST['notice_promotion'];//get matched promotion_id
 
 					$put_into_session = check_promotion($current_promotion,$pro_quantity,$add_to_cart['pro_o_price']);
-					}
+					}*/
 
 					if (isset($_POST['notice_promotion'])){
 
 					$current_promotion = $_POST['notice_promotion'];//get matched promotion_id
 
 					$put_into_session = check_promotion($current_promotion,$pro_quantity,$add_to_cart['pro_o_price']);
+
 
 
 
@@ -181,11 +200,29 @@ if(isset($_POST['originator'])) {
 
 						
 						$add_to_cart['pro_weight_all'] = $put_into_session[1] * $add_to_cart['pro_weight'];
-						array_push($total_list,$add_to_cart);	
-
-
+						array_push($total_list,$add_to_cart);
 
 						}
+						elseif($put_into_session[0]=='4')	{ ///////////  free shipping ///////
+
+
+						
+						$add_to_cart['pro_type'] = $put_into_session[0];
+						$add_to_cart['quantity'] = $pro_quantity;
+						$add_to_cart['whole_price'] = $put_into_session[1] * $pro_quantity;
+						$add_to_cart['pro_weight_all'] = 0;  ///////////// free shipping so make the weight to zero
+						
+					
+
+
+						array_push($total_list,$add_to_cart);
+			
+
+						}
+
+
+
+						
 
 					}
 					
@@ -196,7 +233,7 @@ if(isset($_POST['originator'])) {
 					#echo "##".$_SESSION['code'];
 
 				
-			// if shopping is not exist
+			// if shopping cart is not exist
 				}
 			else 	
 				{
@@ -207,11 +244,13 @@ if(isset($_POST['originator'])) {
 
 				if (isset($_POST['notice_promotion'])){
 
+
 				$current_promotion = $_POST['notice_promotion'];//get matched promotion_id
 
 				$put_into_session = check_promotion($current_promotion,$pro_quantity,$add_to_cart['pro_o_price']);
 
 
+				
 
 				
 
@@ -236,6 +275,18 @@ if(isset($_POST['originator'])) {
 				array_push($total_list,$add_to_cart);	
 
 
+
+				}
+				elseif($put_into_session[0]=='4')	{ ///////////  free shipping ///////
+					
+				$add_to_cart['pro_type'] = $put_into_session[0];
+				$add_to_cart['quantity'] = $pro_quantity;
+				$add_to_cart['whole_price'] = $put_into_session[1] * $pro_quantity;
+				$add_to_cart['pro_weight_all'] = 0;  ///////////// free shipping so make the weight to zero
+
+
+				array_push($total_list,$add_to_cart);	
+					
 
 				}
 

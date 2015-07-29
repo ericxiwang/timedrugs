@@ -19,7 +19,7 @@ function final_amount(){
 
 	var final_return = ((parseInt(get_goods_fee)*get_tax_rate) + parseInt(shipping_radio)*1.12).toFixed(1);
 
-	document.getElementById("final_pay").innerHTML = final_return;
+	document.getElementById("final_pay").innerHTML = "$" + final_return;
 	document.getElementById("hidden_amount").value = final_return;
 	document.getElementById("submit").disabled = false;
 	
@@ -79,6 +79,7 @@ echo "</tr></thead><tbody>";
 
 #echo count($_SESSION['cart_list']);
 if (isset($_SESSION['cart_list'])){
+
 $total_price = 0;
 foreach ($_SESSION['cart_list'] as $single_product) {
 	$total_price = $total_price + $single_product['whole_price'];
@@ -102,14 +103,30 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 
 			echo $single_product['pro_o_price'];
 			}
+
+			elseif ($single_product['pro_type'] == '4'){
+				echo $single_product['pro_o_price'];
+			}
+
+			
 		echo "</td>";
 		echo "<td>";//购买数量列
 			#echo $single_product['pro_code'];
 			echo $single_product['quantity'];
 		echo "</td>";
 		echo "<td>";//产品总价
+
+			if ($single_product['pro_type'] == '4'){
+
+				echo $single_product['whole_price'];
+				echo "<p>免运费！</p>";
+			}
+			else{
+
+				echo $single_product['whole_price'];
+			}
 			
-			echo $single_product['whole_price'];
+			
 		echo "</td>";
 
 		echo "<td>";
@@ -215,6 +232,7 @@ $total_weight = 0;
 foreach ($_SESSION['cart_list'] as $single_product) {
 
 	$total_price = $total_price + $single_product['whole_price'];
+
 	
 	$total_weight = $total_weight + $single_product['pro_weight_all'];
 
@@ -237,6 +255,9 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 
 			echo $single_product['pro_o_price'];
 			}
+			elseif ($single_product['pro_type'] == '4'){
+				echo $single_product['pro_o_price'];
+			}
 
 
 
@@ -250,7 +271,15 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 		echo "</td>";
 		echo "<td>";//产品总价
 			
-			echo $single_product['whole_price'];
+			if ($single_product['pro_type'] == '4'){
+
+				echo $single_product['whole_price'];
+				echo "<p>免运费！</p>";
+			}
+			else{
+
+				echo $single_product['whole_price'];
+			}
 		echo "</td>";
 		//echo "<td>";//产品总重
 			
@@ -290,60 +319,92 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 
 {
 	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////// all pruducts are free shipping ////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	if ($total_weight == 0){
+		echo "全部产品为包邮，平邮方式寄送";
+		echo "<br/><input type='radio' onClick='final_amount()' id ='common' name = 'shipping_fee' value = 0>普通平邮";
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////// normal order content///////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+
+	elseif ($total_weight > 0)
+	{
+
+
 	
 
-	$user_country = $user_country_input;
-	$tax_shipping_display = $tax_shipping_display_input;
+			$user_country = $user_country_input;
+			$tax_shipping_display = $tax_shipping_display_input;
 
-	foreach ($tax_shipping_display as $shipping_method) {
+			foreach ($tax_shipping_display as $shipping_method) 
+			{
 
-		///////////////////// basic shipping ///////////
-		
-		if ($shipping_method['shipping_type'] == 'common'){
-		echo "<div class='radio'>";
-			if ($total_weight <=1 ){
-				$shipping_fee_option = $shipping_method['shipping_basefee'];
-		
+				///////////////////// basic shipping ///////////
+				
+				if ($shipping_method['shipping_type'] == 'common')
+				{
+				echo "<div class='radio'>";
+					if ($total_weight <=1 ){
+						$shipping_fee_option = $shipping_method['shipping_basefee'];
+				
 
 
+					}
+					else if ($total_weight > 1){
+						$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];//////普通平邮邮费计算
+				
+
+
+					}
+					else{
+
+						echo "no one matched";
+					}
+				
+				
+				echo "<input type='radio' onClick='final_amount()' id ='common' name = 'shipping_fee' value='$shipping_fee_option'>普通平邮 $ ".$shipping_fee_option;
+				echo "</div>";
+				}
+
+				//////////////////////////extra shipping ///////////
+				elseif ($shipping_method['shipping_type'] == 'extra')
+				{
+
+				echo "<div class='radio'>";
+				
+					if ($total_weight <= 1)
+					{
+						$shipping_fee_option = $shipping_method['shipping_basefee'];
+
+					}
+					else if ($total_weight > 1)
+					{
+						$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];/////特快专递邮费计算
+
+					}
+				echo "<input type='radio' onClick='final_amount()' id ='extra' name = 'shipping_fee' value='$shipping_fee_option'>特快专递 $ ".$shipping_fee_option;
+				
+				echo "</div>";
+				}
 			}
-			else if ($total_weight > 1){
-				$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];//////普通平邮邮费计算
-		
-
-
-			}
-			else{
-
-				echo "no one matched";
-			}
-		
-		
-		echo "<input type='radio' onClick='final_amount()' id ='common' name = 'shipping_fee' value='$shipping_fee_option'>普通平邮 $ ".$shipping_fee_option;
-		echo "</div>";
-		}
-
-		//////////////////////////extra shipping ///////////
-		elseif ($shipping_method['shipping_type'] == 'extra'){
-
-		echo "<div class='radio'>";
-		
-			if ($total_weight <= 1){
-			$shipping_fee_option = $shipping_method['shipping_basefee'];
-
-			}
-			else if ($total_weight > 1){
-			$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];/////特快专递邮费计算
-
-			}
-		echo "<input type='radio' onClick='final_amount()' id ='extra' name = 'shipping_fee' value='$shipping_fee_option'>特快专递 $ ".$shipping_fee_option;
-		
-		echo "</div>";
-		}
 	}
 
 }
 if ($query_user['user_country'] == 'Canada') {
+	echo "</td><td>";
 	draw_radio('Canada',$tax_shipping_display[1],$total_weight);
 
 	echo "</td>";
@@ -351,15 +412,15 @@ if ($query_user['user_country'] == 'Canada') {
 
 
 elseif($query_user['user_country'] == 'China'){
-	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
-
+	//echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
+	echo "</td><td>";
 	draw_radio('China',$tax_shipping_display[1],$total_weight);
 
 	echo "</td>";
 }
 elseif($query_user['user_country'] == 'USA'){
-	echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
-
+	//echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
+	echo "</td><td>";
 	draw_radio('USA',$tax_shipping_display[1],$total_weight);
 
 		echo "</td>";
@@ -406,8 +467,9 @@ $total_price = number_format($total_price*(1+floatval($tax_shipping_display[0])/
 
 echo "</tr>";
 echo "<tr>";
-	echo "<td colspan=6>";
-	echo "<p id = 'final_pay' ></p>";
+	echo "<td colspan=6 align=right>";
+	echo "订单总额（含税含运费）";
+	echo "<p id = 'final_pay' style='font-size:160%''></p>";
 	echo "<input name = 'hidden_amount' id = 'hidden_amount' type='hidden' value=''/>";
 	echo "</td>";
 echo "</tr>";
@@ -451,7 +513,7 @@ echo "</table>";
 $full_name = strval($current_user_info[1]) . strval($current_user_info[2]);
 echo "<input name='full_name' type = hidden value = $full_name>";
 #echo "<input type = hidden value = $query_user['user_country']>";
-echo $query_user['user_mailing_address'];
+//echo $query_user['user_mailing_address'];
 $full_address = $query_user['user_country']." ".$query_user['user_province']." ".$query_user['user_mailing_address'];  /////////// generate full address string ///////////
 
 $full_address = urlencode($full_address);
