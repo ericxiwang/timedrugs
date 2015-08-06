@@ -53,10 +53,10 @@ $load_category = mysqli_query($db_connect,$load_category);
 		产品规格:<input class="form-control" type='text' name = 'pro_spec'>
 		产品描述:<textarea class = 'form-control' rows="5" name='pro_des'></textarea>
 		<div class="checkbox">
-  			<label><input name='pro_onsell'type="checkbox" value=1 checked>在线销售 </label>
+  			<label><input name='pro_onsell' type="checkbox" value=1 checked>在线销售 </label>
 		</div>
 		<div class="checkbox">
-  			<label><input name='pro_wholesell'type="checkbox" value=1>包邮批发 </label>
+  			<label><input name='pro_wholesell' type="checkbox" value=1>包邮批发 </label>
 		</div>
 
 
