@@ -224,134 +224,6 @@ echo "</table>";
 </form>
 </div>
 
-<?php   ///////add promotion to database
-/*
-function promotion_edit(){
-
-global $db_connect;
-
-
-$promotion_id = $_POST['promotion_edit'];
-
-if ($_POST['pro_submit'] == 'buy_get_submit')  //////////////buy and get promotion //////////
-{
-
-	//echo "AASSAAAA".$_POST['pro_type_discount'];
-	$pro_type = 2;
-	$pro_buy = $_POST['pro_buy'];
-	$pro_get = $_POST['pro_get'];
-
-	if (isset($_POST['pro_endless'])){
-		$pro_endless = '1';
-
-	}
-	else{
-		$pro_endless = '0';
-	}
-	if (isset($_POST['pro_enabled'])){
-		$pro_enabled = '1';
-	}
-	else{
-		$pro_enabled = '0';
-	}
-
-	$promotion_db = "INSERT INTO pro_discount (promotion_id,
-											pro_buy,pro_get,
-											pro_type,
-											dis_endless,
-											dis_enabled
-											) 
-									VALUES ('$promotion_id',
-										'$pro_buy',
-										'$pro_get',
-										'$pro_type',
-										'$pro_endless',
-										'$pro_enabled')";
-	$promotion_db = mysqli_query($db_connect,$promotion_db) or die;
-	
-}
-elseif ($_POST['pro_submit'] == 'discount_submit') {
-	$pro_type = 1;
-	$pro_discount = $_POST['pro_discount'];
-	if (isset($_POST['pro_endless'])){
-		$pro_endless = '1';
-
-	}
-	else{
-		$pro_endless = '0';
-	}
-	if (isset($_POST['pro_enabled'])){
-		$pro_enabled = '1';
-	}
-	else{
-		$pro_enabled = '0';
-	}
-	$promotion_db = "INSERT INTO pro_discount (promotion_id,
-											discount_value,
-											pro_type,
-											dis_endless,
-											dis_enabled
-											) 
-									VALUES ('$promotion_id',
-										'$pro_discount',
-						
-										'$pro_type',
-										'$pro_endless',
-										'$pro_enabled')";
-	$promotion_db = mysqli_query($db_connect,$promotion_db) or die;
-
-
-}
-elseif ($_POST['pro_submit'] == 'shippingfree_submit') {
-	$pro_type = 4;
-
-	//$pro_discount = $_POST['pro_discount'];
-	if (isset($_POST['pro_endless'])){
-		$pro_endless = '1';
-
-	}
-	else{
-		$pro_endless = '0';
-	}
-	if (isset($_POST['pro_enabled'])){
-		$pro_enabled = '1';
-	}
-	else{
-		$pro_enabled = '0';
-	}
-	$promotion_db = "INSERT INTO pro_discount (promotion_id,
-											pro_type,
-											dis_endless,
-											dis_enabled
-											) 
-									VALUES ('$promotion_id',
-										'$pro_type',
-										'$pro_endless',
-										'$pro_enabled')";
-	$promotion_db = mysqli_query($db_connect,$promotion_db) or die;
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-if (isset($_POST['pro_submit'])){
-
-	promotion_add();
-}
-*/
-
-?>
 
 <div class = 'col-lg-6'>
 <?php
@@ -375,6 +247,7 @@ echo "<form action='promotion_edit.php' method = 'POST'>";
       	<input   id='pro_discount' name='pro_discount' type='text' value='$promotion_query[discount_value]' size='3' readonly/>%
  
       	<button class='btn btn-danger btn-xs' id='add3' name='' type='button' value='+' />+</button> 
+      	<input type='hidden' name = 'promotion_id' value = '$promotion_id'>
 
       	";
 
@@ -401,7 +274,10 @@ echo "<form action='promotion_edit.php' method = 'POST'>";
 		      <input id='pro_get'  name='pro_get' type='text' value='1' size='3' readonly/>
 		      
 		      <button class='btn btn-danger btn-xs' id='add2' name='' type='button' value='+' />+</button> 
-		      </h3>";
+		      </h3>
+		      <input type='hidden' name = 'promotion_id' value = '$promotion_id'>
+		      ";
+
 
 
 
@@ -413,6 +289,9 @@ echo "<form action='promotion_edit.php' method = 'POST'>";
 			break;
 		case 4:
 			echo "免除运费";
+			echo "<input name='free_shipping' type = hidden>
+			<input type='hidden' name = 'promotion_id' value = '$promotion_id'>
+			";
 			break;
 
 
@@ -442,14 +321,83 @@ echo "<form action='promotion_edit.php' method = 'POST'>";
       	
     	
 
-    	echo "<br/><button class='btn btn-success' name='pro_submit' type='submit' value='discount_submit' />修改促销选项</button> ";
-    	echo "<button class='btn btn-danger' name='pro_submit' type='submit' value='discount_delete' />删除促销选项</button> ";
+    	echo "<br/><button class='btn btn-success' name='pro_submit' type='submit' value='pro_edit' />修改促销选项</button> ";
+    	echo "<button class='btn btn-danger' name='pro_submit' type='submit' value='pro_delete' />删除促销选项</button> ";
 
 		echo "</form>";
 }
 
+function edit_to_db(){
+	global $db_connect;
+	if (isset($_POST['pro_submit'])){
+		if ($_POST['pro_submit'] == 'pro_edit')
+		{
+
+			if (isset($_POST['pro_endless'])){
+				$pro_endless = 1;
+			}
+			else{
+				$pro_endless = 0;
+			}
+			if (isset($_POST['pro_enabled'])){
+				$pro_enabled = 1;
+			}
+			else{
+				$pro_enabled = 0;
+			}
+			$promotion_id   	= $_POST['promotion_id'];
+
+			if(isset($_POST['pro_discount']))
+			{
+				
+				$new_discount		= $_POST['pro_discount'];
 
 
+			
+				$update_discount = "UPDATE pro_discount SET 
+									discount_value	=	'$new_discount', 
+									dis_endless		=	'$pro_endless',
+									dis_enabled		=	'$pro_enabled'
+									where promotion_id = '$promotion_id'";
+				$update_discount = mysqli_query($db_connect,$update_discount);
+				header("Location: promotion_edit.php");
+
+			}
+			elseif (isset($_POST['pro_buy']))
+			{
+				$pro_buy	=	$_POST['pro_buy'];
+				$pro_get	=	$_POST['pro_get'];
+				$update_buy_get = "UPDATE pro_discount SET
+									pro_buy		=	'$pro_buy',
+									pro_get 	=	'$pro_get',
+									dis_endless =	'$pro_endless',
+									dis_enabled =	'$pro_enabled'
+									where promotion_id = '$promotion_id'
+									";
+				$update_buy_get = mysqli_query($db_connect,$update_buy_get);
+				header("Location: promotion_edit.php");
+
+			}
+			elseif (isset($_POST['free_shipping']))
+			{
+				$update_free_shipping = "UPDATE pro_discount SET 
+									
+									dis_endless		=	'$pro_endless',
+									dis_enabled		=	'$pro_enabled'
+									where promotion_id = '$promotion_id'";
+				$update_free_shipping = mysqli_query($db_connect,$update_free_shipping);
+				header("Location: promotion_edit.php");
+			}
+		}
+		elseif ($_POST['pro_submit']=='pro_delete')
+		{
+			echo "delete";
+		}
+
+}
+
+}
+edit_to_db();
 
 
 
