@@ -93,7 +93,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
       <div class="panel-body">
           <a href="manage/promotion_add.php" target="iframe_1">新建促销</a><br/>
           <a href="manage/promotion_edit.php" target="iframe_1">编辑促销</a><br/>
-          <a href="test_1.php" target="iframe_1">产品促销编辑</a><br/>
+          <a href="manage/promotion_select.php" target="iframe_1">产品促销编辑</a><br/>
 
       </div>
     </div>

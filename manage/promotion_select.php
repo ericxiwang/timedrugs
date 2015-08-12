@@ -1,4 +1,3 @@
- 
 <?php
 ob_start();
 include '../db_cn.php';
@@ -6,137 +5,15 @@ include 'basic_html.php';
 require '../uuid_gen.php';
 
 ?>
-<?php
-/*
-$load_brand_list = "SELECT pro_brand_name from pro_brand_list";
-$load_brand_list = mysqli_query($db_connect,$load_brand_list);
-
-$load_category = "SELECT id,pro_cate_name from pro_category";
-$load_category = mysqli_query($db_connect,$load_category);
-*/
-?>
-
-
-
-	<div class = 'col-lg-12' >
-	<form role='form' action="product_edit.php" method='POST' name = 'pro_upload' enctype="multipart/form-data">
-		
-
-
-
-
-	
-	
-	<?php
-///////////////////////////////////////////// update function begin /////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function pro_update()
-{
-
-
-		global $db_connect;
-		$pro_name 		=   $_POST['pro_name'];
-		//$pro_img		=	$_POST['pro_img'];
-		$pro_o_price	=	$_POST['pro_o_price'];
-		$pro_brand 		=	$_POST['pro_brand'];
-		$pro_weight 	=	$_POST['pro_weight'];
-		$pro_category 	=	$_POST['pro_category'];
-		$pro_spec 		=	$_POST['pro_spec'];
-		$pro_code		=	$_POST['pro_code'];
-		$pro_img		=	$_POST['img_code'];
-		$pro_onsell		=	$_POST['pro_onsell'];
-
-		//echo "@".$pro_name."@".$pro_o_price."@".$pro_o_price."@".$pro_brand."@".$pro_weight."@".$pro_category."@".$pro_spec;
-
-		if ((empty($_POST['pro_name'])) 
-			or (empty($_POST['pro_o_price'])) 
-			or (empty($_POST['pro_o_price'])) 
-			or (empty($_POST['pro_brand'])) 
-			or (empty($_POST['pro_weight'])) 
-			or (empty($_POST['pro_category'])) 
-			or (empty($_POST['pro_spec'])))
-		{
-			echo "failed";
-		}
-		else  ///////////execute data update process //////////
-		{	
-
-			
-
-			$product_update = "UPDATE product_info SET 
-							pro_name 		= '$pro_name',
-							pro_brand 		= '$pro_brand',
-							pro_category 	= '$pro_category',
-							pro_o_price		= '$pro_o_price',
-							pro_weight 		= '$pro_weight',
-							pro_spec 		= '$pro_spec',
-							pro_onsell 		= '$pro_onsell'
-
-							WHERE pro_code='$pro_code'";
-
-			$product_update = mysqli_query($db_connect,$product_update);
-
-			
-
-			if (isset($_FILES['pro_img']))  ////////////////update image ///////////
-			{
-
-				$uploadOk = 1;
-				$target_file = "../".$pro_img;
-
-				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-				// Check if image file is a actual image or fake image
-			
-				    $check = getimagesize($_FILES["pro_img"]["tmp_name"]);
-				    if($check !== false) {
-				        echo "File is an image - " . $check["mime"] . ".";
-				        $uploadOk = 1;
-				    } else {
-				        echo "File is not an image.";
-				        $uploadOk = 0;
-				    }
-				
-				
-					if (move_uploaded_file($_FILES["pro_img"]["tmp_name"], $target_file)) ///////////////copy image file into dedicated folder ///////////
-					{
-		        		echo "The file ". basename( $_FILES["pro_img"]["name"]). " has been uploaded.";
-					}
-
-					else
-					{
-
-						echo "nothing";
-					}
-
-			}
-			else
-			{
-				echo "no image uploaded!";
-			}
-		
-			header("Location: product_edit.php");
-
-
-
- 
-
-
-
-
-
-
-
-		}
-}
-	
-
-
+<div class = 'col-lg-5' >
+<?php 
 function load_page(){
 	global $db_connect;
+	//////////////////////// if there is no precondition , that means a new page loaded ////////////////
 	if ((!(isset($_POST['pro_edit']))) and (!(isset($_POST['update_confirm']))))
 	{
 	echo "<div class='col-lg-12' style='text-align:center'><p><h3>产品编辑</h3></p></div><div class='row'>";
-	$load_all_product = "SELECT pro_img,pro_name,pro_o_price,pro_brand,pro_weight,pro_spec,pro_onsell,pro_code from product_info order by id desc";
+	$load_all_product = "SELECT pro_img,pro_name,pro_o_price,pro_brand,pro_weight,pro_spec,pro_onsell,pro_code,promotion_id from product_info order by id desc";
 	$load_all_product = mysqli_query($db_connect,$load_all_product);
 
 
@@ -147,11 +24,11 @@ function load_page(){
 			<th style='width:8%'>图片</th> 
 			<th style='width:15%'>产品名称</th> 
 			<th style='width:15%'>产品单价</th> 
-			<th style='width:15%'>品牌名称</th> 
+
 			<th style='width:15%'>产品重量</th> 
-			<th style='width:15%'>产品规格</th> 
+
 			<th style='width:10%'>在售状态</th> 
-			<th style='width:10%'>编辑商品</th> 
+
 			</thead></tr>";
 	echo "</table></div>";
 
@@ -168,9 +45,9 @@ function load_page(){
 		echo "</td>";
 		echo "<td style='width:15%'>".$one_product['pro_name']."</td>";
 		echo "<td style='width:15%'>".$one_product['pro_o_price']."</td>";
-		echo "<td style='width:15%'>".$one_product['pro_brand']."</td>";
+
 		echo "<td style='width:15%'>".$one_product['pro_weight']."</td>";
-		echo "<td style='width:15%'>".$one_product['pro_spec']."</td>";
+
 		if ($one_product['pro_onsell'] == 1){
 			echo "<td style='width:10%'><input type='checkbox' checked disabled></td>";
 		}
@@ -178,11 +55,10 @@ function load_page(){
 			echo "<td style='width:10%'><input type='checkbox' disabled></td>";
 		}
 
+
 		
 
-		echo "<td style='width:15%'>";
-		echo "<button type='submit' name ='pro_edit' class='btn btn-primary glyphicon glyphicon-edit' style='height:50px;margin-right:20px' value = '$one_product[pro_code]'>编辑</button>";
-		echo "</td>";
+		
 		echo "</tr>";
 
 
@@ -196,7 +72,7 @@ function load_page(){
 	echo "</table>";
 	echo "</div>";
 
-	}}
+	}
 	////////////////////////////////////////////////////// product list display end //////////////////////////
 
 
@@ -291,22 +167,6 @@ function load_page(){
 		pro_update();
 	}
 }
-load_page();	
-///////////////////////////////////////////// update page end       /////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+load_page();
 ?>
-
 </div>
-<div class = 'col-lg-6' >
-
-
-</div>
-</form>
-
-
-<?php 
-ob_end_flush()
-
-?>
