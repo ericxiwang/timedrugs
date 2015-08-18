@@ -133,6 +133,7 @@ function pro_update()
 
 function load_page(){
 	global $db_connect;
+	//////////////////////// if there is no precondition , that means a new page loaded ////////////////
 	if ((!(isset($_POST['pro_edit']))) and (!(isset($_POST['update_confirm']))))
 	{
 	echo "<div class='col-lg-12' style='text-align:center'><p><h3>产品编辑</h3></p></div><div class='row'>";
@@ -196,7 +197,7 @@ function load_page(){
 	echo "</table>";
 	echo "</div>";
 
-	}}
+	}
 	////////////////////////////////////////////////////// product list display end //////////////////////////
 
 
