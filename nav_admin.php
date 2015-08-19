@@ -123,7 +123,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
     </div>
     <div id="collapse6" class="panel-collapse collapse">
       <div class="panel-body">
-          <a href="test_1.php" target="iframe_1">浏览订单并编辑</a><br/>
+          <a href="manage/order_mgmt.php" target="iframe_1">浏览订单并编辑</a><br/>
 
 
       </div>

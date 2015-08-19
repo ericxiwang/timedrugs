@@ -15,6 +15,8 @@ function change_select_color(value){
 
 	//current_select.style.backgroundColor = '#eeeeee';
 	current_select.classList.add('btn-danger');
+	document.getElementById('update_promotion').disabled=false;
+	document.getElementById('cancel_modify').disabled=false;
 
 }
 
@@ -24,7 +26,8 @@ function change_select_color(value){
 
 <div class = 'col-lg-12' >
 <form method='POST' action='promotion_select.php' >
-<input class='btn btn-success'type='submit' name = 'update_promotion' value='确认提交修改'/>
+<input id = 'update_promotion' class='btn btn-success' type='submit' name = 'update_promotion' value='确认提交修改' disabled />
+<input id = 'cancel_modify' class='btn btn-warning' type='button' name = 'reflesh' value='放弃当前修改' disabled onclick="document.location.reload()" />
 <?php 
 function load_page(){
 	global $db_connect;
@@ -32,13 +35,16 @@ function load_page(){
 	if ((!(isset($_POST['pro_edit']))) and (!(isset($_POST['update_confirm']))))
 	{
 	echo "<div class='col-lg-6' style='text-align:center'><p><h3>产品编辑</h3></p></div>";
+
 	$load_all_product = "SELECT pro_code,pro_img,pro_name,pro_o_price,pro_brand,pro_weight,pro_spec,pro_onsell,pro_code,promotion_id from product_info order by id desc";
 	$load_all_product = mysqli_query($db_connect,$load_all_product);
 
 
 
 
-	echo "<div ><table class='table table-condensed' style='margin:0px;'>";
+	echo "<div >
+
+	<table class='table table-condensed' style='margin:0px;'>";
 	echo "<tr ><thead ><tr>
 			<th style='width:6%'>图片</th> 
 			<th style='width:10%'>产品名称</th> 
@@ -129,10 +135,10 @@ $promotion_list = mysqli_query($db_connect,$promotion_list);
 echo "<select name = 'select_string[$pro_code]' class='form-control' onchange='change_select_color(this.name)''>";
 	switch ($current_promotion['pro_type']){
 		case 1:
-		echo "<option value='$current_promotion[promotion_id]'>原价$one_promotion[discount_value]%</option>";
+		echo "<option value='$current_promotion[promotion_id]'>原价".$current_promotion['discount_value']."%</option>";
 		break;
 		case 2:
-		echo "<option value='$current_promotion[promotion_id]'>".买.$current_promotion['pro_buy'].赠.$current_promotion['pro_get'];
+		echo "<option value='$current_promotion[promotion_id]'>".买.$current_promotion['pro_buy'].赠.$current_promotion['pro_get']."</option>";
 		break;
 		case 4:
 		echo "<option value='$current_promotion[promotion_id]'>免运费</option>";
@@ -142,10 +148,10 @@ foreach ($promotion_list as $one_promotion) {
 	switch ($one_promotion['pro_type']){
 
 		case 1:
-		echo "<option value='$one_promotion[promotion_id]'>原价$one_promotion[discount_value]%</option>";
+		echo "<option value='$one_promotion[promotion_id]'>原价".$one_promotion['discount_value']."%</option>";
 		break;
 		case 2:
-		echo "<option value='$one_promotion[promotion_id]'>买 ".$one_promotion['pro_buy']." 赠 ".$one_promotion['pro_get'];
+		echo "<option value='$one_promotion[promotion_id]'>买 ".$one_promotion['pro_buy']." 赠 ".$one_promotion['pro_get']."</option>";
 		break;
 		case 4:
 		echo "<option value='$one_promotion[promotion_id]'>免运费</option>";
@@ -164,13 +170,14 @@ function update_promotion(){
 			
 			//echo $current_code_key."=>".$one_select."<br/>";
 
-			$do_promotion_update = "UPDATE product_info SET promotion_id	=	'$one_select' where pro_code = '$current_code_key'";
+			$do_promotion_update = "UPDATE product_info SET promotion_id = '$one_select' where pro_code = '$current_code_key'";
 			$do_promotion_update = mysqli_query($db_connect,$do_promotion_update);
 
 			# code...
 		}
 		
-
+		header('Location:promotion_select.php');
+		//die();
 	}
 
 
