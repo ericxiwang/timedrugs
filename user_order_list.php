@@ -63,7 +63,7 @@ $order_basic_info = mysqli_fetch_assoc($order_basic_info);
 
 
 
-//echo "<div class='danger'><p>订单编号: ".$pro_code."</p></div>";
+echo "<div class='danger'><p>订单编号: ".$pro_code."</p></div>";
 echo "<table class='table  table-bordered table-hover table-condensed' >";
 
 echo "<thead><tr style='width:30px;'><th>产品图片</th>";

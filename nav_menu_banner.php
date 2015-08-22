@@ -47,6 +47,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
         <?php
         if (isset($_SESSION['user_account'])){
           $current_user = $_SESSION['user_account'];
+      
 
           echo "<a href='user_order_list.php'><span class='glyphicon glyphicon-certificate'></span>&nbsp;".$current_user[1]."&nbsp;".$current_user[2]."您好,点击这里可查看订单状态</a>";
           echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";

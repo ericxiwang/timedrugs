@@ -92,6 +92,12 @@ echo "</td></tr>";
 echo "</tbody>";
 echo "</table>";
 }
+else{
+
+	session_destroy();
+	echo "logout";
+	header("Location: index.php");
+}
 
 
 ############# if session is not set , redirect to index.php
