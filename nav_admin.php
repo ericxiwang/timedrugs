@@ -108,7 +108,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
     </div>
     <div id="collapse5" class="panel-collapse collapse">
       <div class="panel-body">
-          <a href="test_1.php" target="iframe_1">用户浏览编辑</a><br/>
+          <a href="manage/user_mgmt.php" target="iframe_1">用户浏览编辑</a><br/>
 
       </div>
     </div>
