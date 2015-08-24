@@ -45,6 +45,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
           <a href="test_1.php" target="iframe_1">网站关键字</a><br/>
           <a href="test_1.php" target="iframe_1">滑动图片编辑</a><br/>
           <a href="manage/edit_nav.php" target="iframe_1">导航目录编辑</a><br/>
+          <a href="manage/DB_backup.php" target="iframe_1">数据库备份</a><br/>
       </div>
     </div>
   </div>
