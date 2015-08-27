@@ -107,6 +107,12 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 			elseif ($single_product['pro_type'] == '4'){
 				echo $single_product['pro_o_price'];
 			}
+			
+			else
+			{
+
+				echo $single_product['pro_o_price'];			
+			}
 
 			
 		echo "</td>";
@@ -256,6 +262,10 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 			echo $single_product['pro_o_price'];
 			}
 			elseif ($single_product['pro_type'] == '4'){
+				echo $single_product['pro_o_price'];
+			}
+			else{
+
 				echo $single_product['pro_o_price'];
 			}
 

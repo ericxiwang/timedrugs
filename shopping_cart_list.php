@@ -56,7 +56,7 @@ function check_promotion($current_id,$current_quantity,$current_price){
 	$check_promotion_table = mysqli_query($db_connect,$check_promotion_table);
 	$check_promotion_table = mysqli_fetch_assoc($check_promotion_table);
 
-	if ($check_promotion_table['dis_enabled']=='1'){
+	if ($check_promotion_table['dis_enabled']=='1'){  ////////////////// if promotion is enabled /////////
 		#print_r($check_promotion_table);
 
 		switch ($check_promotion_table['pro_type'])
@@ -76,6 +76,8 @@ function check_promotion($current_id,$current_quantity,$current_price){
 	      case '2'://buy and get
 	        $show_buy = $check_promotion_table['pro_buy'];
 	        $show_get = $check_promotion_table['pro_get'];
+
+
 	        $real_get = intval($current_quantity/$show_buy);
 
 	        $promotion_result = intval($current_quantity) + $real_get*$show_get;   //// return the quantity includes get items//////
@@ -119,6 +121,21 @@ function check_promotion($current_id,$current_quantity,$current_price){
 	    }
 
 		
+
+	}
+	else
+	{  /////////// no promotion for this product ////////
+
+
+		return array('no_promotion',$current_price,$current_price);
+
+
+
+
+
+
+
+
 
 	}
 
@@ -219,10 +236,33 @@ if(isset($_POST['originator'])) {
 			
 
 						}
+						elseif ($put_into_session[0]=='no_promotion'){
+						$add_to_cart['pro_type'] = $put_into_session[0];
+						$add_to_cart['quantity'] = $pro_quantity;
+						$add_to_cart['whole_price'] = $put_into_session[1] * $pro_quantity;
+						$add_to_cart['o_price'] = $put_into_session[2];
+						$add_to_cart['pro_weight_all'] = $add_to_cart['pro_weight'] * $pro_quantity;
+						array_push($total_list,$add_to_cart);
+						
+
+
+						}
 
 
 
 						
+
+					}
+					else /////////if no promotion detect from page ////////////
+					{
+						$add_to_cart['pro_type'] = $put_into_session[0];
+						$add_to_cart['quantity'] = $pro_quantity;
+						$add_to_cart['whole_price'] = $put_into_session[1] * $pro_quantity;
+						$add_to_cart['o_price'] = $put_into_session[2];
+						$add_to_cart['pro_weight_all'] = $add_to_cart['pro_weight'] * $pro_quantity;
+						array_push($total_list,$add_to_cart);
+						
+
 
 					}
 					
@@ -289,8 +329,21 @@ if(isset($_POST['originator'])) {
 					
 
 				}
+				elseif ($put_into_session[0]=='no_promotion'){
 
-				}
+						$add_to_cart['pro_type'] = $put_into_session[0];
+						$add_to_cart['quantity'] = $pro_quantity;
+						$add_to_cart['whole_price'] = $put_into_session[1] * $pro_quantity;
+						$add_to_cart['o_price'] = $put_into_session[2];
+						$add_to_cart['pro_weight_all'] = $add_to_cart['pro_weight'] * $pro_quantity;
+						array_push($total_list,$add_to_cart);
+						
+
+
+						}
+
+
+			}
 
 
 				$_SESSION['cart_list'] = $total_list;
