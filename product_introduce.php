@@ -70,7 +70,7 @@ include 'nav_menu_banner.php';
         <div class='col-md-5 col-lg-5 panel panel-danger order-page text-danger' style='text-align:center'>";
   echo "<h3>".$current_product['pro_name']."</h3>";
 
-  echo "<img class='img-thumbnail preview-pic' src='$current_product[pro_img]'/></div>";
+  echo "<img class='img-thumbnail preview-pic' src='$current_product[pro_img]' style='height:80%;width:100%'/></div>";
 
   echo "<div class='col-md-4 col-lg-4 panel panel-danger order-page'>";
   echo "<ul class='list-group'>";
@@ -79,6 +79,7 @@ include 'nav_menu_banner.php';
   echo "<li class='list-group-item'>产品品牌: ".$current_product['pro_brand']."</li>";
   echo "<li class='list-group-item'>规格: ".$current_product['pro_spec']."</li>";
   echo "<li class='list-group-item'>邮寄重量: ".$current_product['pro_weight']."公斤</li>";
+
   #echo "<h4><li class='list-group-item'>零售价格：".$current_product['pro_']"</li>";
   ///////////in terms of promotion_id and promotion_type draw the promotion segement ///////
   if ($show_enable == 'yes'){
@@ -151,9 +152,16 @@ include 'nav_menu_banner.php';
 
       </div>";
   echo "<div class='col-md-5 col-lg-5 panel panel-danger order-page-m' >
-        <ul class='list-group'>
-        <li class='list-group-item'>产品名称：海洋单细胞海藻</li>
-        </ul>
+        
+
+          <a href='http://www.weibo.com/beimeihaoshiguang'><img width='38' height='38' src='image/icon_img/weibo.jpg'></a>访问新浪微博
+          <a href='http://www.weibo.com/beimeihaoshiguang'><img width='38' height='38' src='image/icon_img/weichat.png'></a>访问腾讯微信
+
+
+
+
+
+    
         </div>";
 
   echo "<div class='col-md-4 col-lg-4 panel panel-danger order-page-m' >
@@ -170,7 +178,10 @@ include 'nav_menu_banner.php';
       </div>";
    // load relevant info from other table   
   echo "<div class='col-md-9 col-lg-9 panel panel-danger product_des'>产品描述
-        <div>miaoshu</div>
+        <div>";
+  echo $current_product ['pro_description'];
+
+  echo "</div>
 
       </div>  
       <div class='col-md-9 col-lg-9 panel panel-danger product_des'>相关产品</div>  

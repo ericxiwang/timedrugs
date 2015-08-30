@@ -258,12 +258,12 @@ echo "<form action='promotion_edit.php' method = 'POST'>";
 			break;
 		case 2:
 			echo "<h2>买赠优惠编辑</h2>";
-			echo" <h3> 
+			echo "<h3> 
 		      买 
 		      
 		      <button class='btn btn-danger btn-xs' id='min1'  name='' type='button' value='-' />-</button>
 
-		      <input   id='pro_buy' name='pro_buy' type='text' value='1' size='3' readonly/>
+		      <input   id='pro_buy' name='pro_buy' type='text' value='$promotion_query[pro_buy]'' size='3' readonly/>
 		 
 		      <button class='btn btn-danger btn-xs' id='add1' name='' type='button' value='+' />+</button> 
 		       
@@ -271,7 +271,7 @@ echo "<form action='promotion_edit.php' method = 'POST'>";
 
 		      <button class='btn btn-danger btn-xs' id='min2'  name='' type='button' value='-' />-</button>
 		     
-		      <input id='pro_get'  name='pro_get' type='text' value='1' size='3' readonly/>
+		      <input id='pro_get'  name='pro_get' type='text' value='$promotion_query[pro_get]'' size='3' readonly/>
 		      
 		      <button class='btn btn-danger btn-xs' id='add2' name='' type='button' value='+' />+</button> 
 		      </h3>
@@ -389,10 +389,18 @@ function edit_to_db(){
 				header("Location: promotion_edit.php");
 			}
 		}
+
 		elseif ($_POST['pro_submit']=='pro_delete')
-		{
-			echo "delete";
+		{	
+			$promotion_id  = $_POST['promotion_id'];
+
+			$promotion_del = "DELETE from pro_discount where promotion_id = '$promotion_id'";
+			$promotion_del = mysqli_query($db_connect,$promotion_del);
+			header("Location: promotion_edit.php");
 		}
+			#header("Location: promotion_edit.php");
+
+		
 
 }
 
