@@ -1,11 +1,8 @@
 <?php
 ob_start();
 session_start();
-
-
 // Create connection
 include 'db_cn.php';/////include basic DB connection , db name is inventory////////
-
 
 ?>
 
@@ -34,7 +31,9 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
   
     
-      <div  style="float:left;padding-left:50px;text-aling:center">欢迎光临好时光保健商城</div>
+      <div  class="top-banner_1 menu_1" style="float:left;padding-left:10%;text-aling:center">
+      <p class='text-danger'>欢迎光临好时光保健商城</p>
+      </div>
      
       <div class='top-banner_1 menu_1'>
         
@@ -83,17 +82,30 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
   </div>
 </div>
 <div class='container'>
-  <div class='col-lg-12 panel panel-danger' style="padding:0px" >
-    <img src='image/top.png' style='width:100%'/>
+  <div class='col-lg-12 panel panel-danger' style="height:120px;padding:0px;background:url('image/top.png')" >
+
+  <form class="navbar-form" role="search">
+  <div class="col-lg-10" style='padding-left:30%;padding-top:3%'>
+    <div class="input-group" >
+      <input type="text" class="form-control" placeholder="输入商品关键字..." size=40>
+      <span class="input-group-btn">
+        <button class="btn btn-danger" type="button">搜索</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+
+  </form>
+
 
 
 
   </div>
 </div>
 <div class="container">
-  <div class="row slider1">
+<div class="row slider1">
+
   <div class="col-md-12 col-lg-12">
-    <div id="myCarousel" class="carousel slide" style="border:1px solid #000000">
+    <div id="myCarousel" class="carousel slide" style="border:1px solid #000000" data-ride="carousel">
     <!-- 轮播（Carousel）指标 -->
       <ol class="carousel-indicators" style="bottom:-10px;">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -130,6 +142,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
     </div>
   </div>
+
   <div class="row">
 
 
@@ -139,8 +152,8 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
               <a class="btn btn-danger menu glyphicon glyphicon-thumbs-up" role="button" href="#">&nbsp;精品推荐</a>
               <a class="btn btn-danger menu glyphicon glyphicon-usd" role="button" href="#">&nbsp;促销活动</a>
               <a class="btn btn-danger menu glyphicon glyphicon-gift" role="button" href="pro_whole_sale_page.php">&nbsp;批发包邮</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-heart-empty" role="button" href="#">&nbsp;健康咨询</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-map-marker" role="button" href="#">&nbsp;经销网店</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;健康咨询</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-map-marker" role="button" href="sites.php">&nbsp;经销网点</a>
               <a class="btn btn-danger menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>
               <a class="btn btn-danger menu glyphicon glyphicon-shopping-cart" role="button" href="#">&nbsp;订购指南</a>
               

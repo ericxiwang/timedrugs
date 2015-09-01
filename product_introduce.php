@@ -154,14 +154,10 @@ include 'nav_menu_banner.php';
   echo "<div class='col-md-5 col-lg-5 panel panel-danger order-page-m' >
         
 
-          <a href='http://www.weibo.com/beimeihaoshiguang'><img width='38' height='38' src='image/icon_img/weibo.jpg'></a>访问新浪微博
-          <a href='http://www.weibo.com/beimeihaoshiguang'><img width='38' height='38' src='image/icon_img/weichat.png'></a>访问腾讯微信
+          <a href='http://www.weibo.com/beimeihaoshiguang' target='_blank'><img width='38' height='38' src='image/icon_img/weibo.jpg'>新浪微博</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href='http://www.weibo.com/beimeihaoshiguang' target='_blank'><img width='38' height='38' src='image/icon_img/weichat.png'>腾讯微信</a>
 
-
-
-
-
-    
         </div>";
 
   echo "<div class='col-md-4 col-lg-4 panel panel-danger order-page-m' >
