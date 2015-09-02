@@ -195,12 +195,41 @@ pro_upload();
 	</div>
 	<div class = 'col-lg-6' >
 	<?php
-	$load_all_product = "SELECT pro_img,pro_name,pro_category,pro_o_price from product_info order by id desc";
+	$load_all_product = "SELECT pro_img,pro_name,pro_category,pro_o_price from product_info order by id desc limit 15";
 	$load_all_product = mysqli_query($db_connect,$load_all_product);
+
+	
+
+	echo "<table class='table'>";
+	echo "<tr ><thead ><tr>
+			<th style='width:8%'>图片</th> 
+			<th style='width:15%'>产品名称</th> 
+			<th style='width:15%'>产品单价</th> 
+
+	
+
+		
+			</thead></tr>";
+
+
 	foreach ($load_all_product as $one_product) {
-		echo "@@".$one_product['pro_name']."<br/>";
+	
 		# code...
+		echo "<tr>";
+		echo "<td style='width:8%'>";
+		echo "<img class='img-thumbnail preview-pic' src='../$one_product[pro_img]'  style='height:60px;width:60px'/>";
+		echo "</td>";
+
+		echo "<td style='width:15%'>".$one_product['pro_name']."</td>";
+		echo "<td style='width:15%'>".$one_product['pro_o_price']."</td>";
+	
+
+
+		echo "</tr>";
 	}
+	echo "</table>";
+
+
 
 
 
