@@ -193,6 +193,44 @@
   background-color: #c12e2a;
   background-image: none;
 }
+
+/******************************************************************/
+.btn-brown {
+  background-image: -webkit-linear-gradient(top, #eeeeee 0%, #c12e2a 100%);
+  background-image:      -o-linear-gradient(top, #eeeeee 0%, #c12e2a 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#c12e2a));
+  background-image:         linear-gradient(to bottom, #eeeeee 0%, #c12e2a 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9534f', endColorstr='#ffc12e2a', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-repeat: repeat-x;
+  border-color: #b92c28;
+}
+.btn-brown:hover,
+.btn-brown:focus {
+  background-color: #c12e2a;
+  background-position: 0 -15px;
+}
+.btn-brown:active,
+.btn-brown.active {
+  background-color: #c12e2a;
+  border-color: #b92c28;
+}
+.btn-brown:disabled,
+.btn-brown[disabled] {
+  background-color: #c12e2a;
+  background-image: none;
+}
+
+
+/*******************************************************************/
+
+
+
+
+
+
+
+
 .thumbnail,
 .img-thumbnail {
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .075);

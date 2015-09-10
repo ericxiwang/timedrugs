@@ -145,7 +145,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
   <div class="row">
 
-
+<!--
             <div class="col-lg-12 btn-group menu_row" role="button " aria-label="...">
 
               <a class="btn btn-danger menu glyphicon glyphicon-globe" role="button" href="index.php">&nbsp;公司首页</a>
@@ -162,7 +162,22 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
             </div>
             
    
+-->
 
+            <div class="col-lg-12 btn-group menu_row" role="button " aria-label="...">
+
+              <a class="btn btn-danger menu glyphicon glyphicon-globe" role="button" href="index.php">&nbsp;公司首页</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-thumbs-up" role="button" href="#">&nbsp;精品推荐</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-usd" role="button" href="#">&nbsp;促销活动</a>
+       
+              <a class="btn btn-danger menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;抗癌网资讯</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-map-marker" role="button" href="sites.php">&nbsp;经销网点</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>
+              <a class="btn btn-danger menu glyphicon glyphicon-shopping-cart" role="button" href="#">&nbsp;订购指南</a>
+              
+              
+              
+            </div>
 
 
     

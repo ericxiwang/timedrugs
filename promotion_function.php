@@ -25,18 +25,18 @@ foreach ($all_products as $all_cursor){
           if ($promotion_query['pro_type'] == '1'){ /////discount
 
             echo "<p>$".$all_cursor['pro_o_price']."</p>";
-            echo "<p>";
+            echo "<p><code>";
             echo $promotion_query['discount_value']."%";
-            echo "</p>";
+            echo "</code></p>";
 
             
           }
           elseif ($promotion_query['pro_type'] == '2') { //////buy and get
 
             echo "<p>$".$all_cursor['pro_o_price']."</p>";
-            echo "<p>";
+            echo "<p><code>";
             echo "买".$promotion_query['pro_buy']."送".$promotion_query['pro_get'];
-            echo "</p>";
+            echo "</code></p>";
           }
           elseif ($promotion_query['pro_type'] =='3') { /////// special price
             echo "special price";
@@ -45,24 +45,24 @@ foreach ($all_products as $all_cursor){
           }
           elseif ($promotion_query['pro_type'] == '4'){ ////////no shipping fee
              echo "<p>$".$all_cursor['pro_o_price']."</p>";
-             echo "<p>免运费</p>";
-
-
-
-
+             echo "<p><code>免运费</code></p>";
 
           }
+   
 
 
 
       }
       
 
-      else{
-      echo "<p>".$all_cursor['pro_o_price']."</p>";
+      else
+      {
+      
+      echo "<p>$".$all_cursor['pro_o_price']."</p>";
+      echo "<p>&nbsp;</p>";
       }
 
-      echo "<a href='product_introduce.php?id=$all_cursor[pro_code]' role='button' class='btn btn-danger' >在线订购</a>
+      echo "<a href='product_introduce.php?id=$all_cursor[pro_code]' role='button' class='btn btn-danger'>在线订购</a>
 
             </div>";
 
