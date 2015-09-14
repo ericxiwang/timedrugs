@@ -62,7 +62,7 @@ foreach ($all_products as $all_cursor){
       echo "<p>&nbsp;</p>";
       }
 
-      echo "<a href='product_introduce.php?id=$all_cursor[pro_code]' role='button' class='btn btn-danger'>在线订购</a>
+      echo "<a href='product_introduce.php?id=$all_cursor[pro_code]' role='button' class='btn btn-warning'>在线订购</a>
 
             </div>";
 

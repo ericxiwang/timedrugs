@@ -26,16 +26,16 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
   
  
 
-  <div class="container-fluid top-banner ">
+  <div class="container-fluid top-banner">
     
 
   
     
       <div  class="top-banner_1 menu_1" style="float:left;padding-left:10%;text-aling:center">
-      <p class='text-danger'>欢迎光临好时光保健商城</p>
+      <p class='text-warning'>欢迎光临好时光保健商城</p>
       </div>
      
-      <div class='top-banner_1 menu_1'>
+      <div class='top-banner_1 top_bar'>
         
         <a href='shopping_cart_list.php'><span class='glyphicon glyphicon-shopping-cart'></span>&nbsp;查看当前购物车</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -166,14 +166,14 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
             <div class="col-lg-12 btn-group menu_row" role="button " aria-label="...">
 
-              <a class="btn btn-danger menu glyphicon glyphicon-globe" role="button" href="index.php">&nbsp;公司首页</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-thumbs-up" role="button" href="#">&nbsp;精品推荐</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-usd" role="button" href="#">&nbsp;促销活动</a>
+              <a class="btn btn-success menu glyphicon glyphicon-globe" role="button" href="index.php">&nbsp;公司首页</a>
+              <a class="btn btn-success menu glyphicon glyphicon-thumbs-up" role="button" href="#">&nbsp;精品推荐</a>
+              <a class="btn btn-success menu glyphicon glyphicon-usd" role="button" href="pro_whole_sale_page.php">&nbsp;促销活动</a>
        
-              <a class="btn btn-danger menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;抗癌网资讯</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-map-marker" role="button" href="sites.php">&nbsp;经销网点</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>
-              <a class="btn btn-danger menu glyphicon glyphicon-shopping-cart" role="button" href="#">&nbsp;订购指南</a>
+              <a class="btn btn-success menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;抗癌网资讯</a>
+              <a class="btn btn-success menu glyphicon glyphicon-map-marker" role="button" href="sites.php">&nbsp;经销网点</a>
+              <a class="btn btn-success  menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>
+              <a class="btn btn-success menu glyphicon glyphicon-shopping-cart" role="button" href="#">&nbsp;订购指南</a>
               
               
               
@@ -202,7 +202,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
         $query_cate_nav = mysqli_query($db_connect,$query_cate);
 
         foreach ($query_menu_nav as $level_1) {
-        	echo "<div class='panel panel-danger'>";
+        	echo "<div class='panel panel-success'>";
         	
         	echo "<div class='panel-heading'>
             		<h4 class='panel-title'>";
