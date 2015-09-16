@@ -25,18 +25,18 @@ foreach ($all_products as $all_cursor){
           if ($promotion_query['pro_type'] == '1'){ /////discount
 
             echo "<p>$".$all_cursor['pro_o_price']."</p>";
-            echo "<p><code>";
+            echo "<p><h4><code>";
             echo $promotion_query['discount_value']."%";
-            echo "</code></p>";
+            echo "</code></h4></p>";
 
             
           }
           elseif ($promotion_query['pro_type'] == '2') { //////buy and get
 
             echo "<p>$".$all_cursor['pro_o_price']."</p>";
-            echo "<p><code>";
+            echo "<p><h4><code>";
             echo "买".$promotion_query['pro_buy']."送".$promotion_query['pro_get'];
-            echo "</code></p>";
+            echo "</code></h4> </p>";
           }
           elseif ($promotion_query['pro_type'] =='3') { /////// special price
             echo "special price";
@@ -45,7 +45,7 @@ foreach ($all_products as $all_cursor){
           }
           elseif ($promotion_query['pro_type'] == '4'){ ////////no shipping fee
              echo "<p>$".$all_cursor['pro_o_price']."</p>";
-             echo "<p><code>免运费</code></p>";
+             echo "<p><h4><code>免运费</code></h4></p>";
 
           }
    

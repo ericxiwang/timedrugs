@@ -68,7 +68,12 @@ function draw_chart_list(){
 echo "<div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:right;padding-top:15px;'>";
 echo "<form action = 'user_payment.php' method='POST' enctype='multipart/form-data'>";
 
-echo "<table class='table  table-bordered table-hover table-condensed'>";
+
+
+#echo count($_SESSION['cart_list']);
+if (isset($_SESSION['cart_list'])){
+
+	echo "<table class='table  table-bordered table-hover table-condensed'>";
 echo "<thead><tr style='width:30px;'><th>产品图片</th>";
 echo "<th>产品名称</th>";
 echo "<th>产品单价</th>";
@@ -76,9 +81,6 @@ echo "<th>产品数量</th>";
 echo "<th>产品总价</th>";
 echo "<th>修改订单</th>";
 echo "</tr></thead><tbody>";
-
-#echo count($_SESSION['cart_list']);
-if (isset($_SESSION['cart_list'])){
 
 $total_price = 0;
 foreach ($_SESSION['cart_list'] as $single_product) {
@@ -165,8 +167,8 @@ echo "</table>";
 }
 else
 {
-	echo "购物车为空";
-	echo  "<a href='index.php' class='btn btn-danger glyphicon glyphicon-shopping-cart' style='height:50px;margin-right:20px;padding-top:12px' role='button'>&nbsp;继续购物</a>";
+	echo "<div class='glyphicon glyphicon-shopping-cart col-lg-12 text-center'><h3>当前购物车为空</h3></div><br/>";
+	echo  "<div class='col-lg-12 text-center'><a href='index.php' class='btn btn-danger glyphicon glyphicon-shopping-cart' style='height:50px;margin-right:20px;padding-top:12px' role='button'>&nbsp;继续购物</a></div><br/><br/><br/><br/><br/>";
 
 
 }

@@ -121,7 +121,7 @@ echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
 echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td>";
 
 echo "</table>";
-echo "<a href='user_order_list.php' role='button' class='btn btn-danger'>返回列表</a>";
+echo "<br/><div class='col-lg-12 text-center'><a href='user_order_list.php' role='button' class='btn btn-danger'>返回列表</a></div><br/><br/><br/>";
 }
 
 }  //////////functino selected order end //////////////
