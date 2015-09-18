@@ -90,7 +90,9 @@ include 'nav_menu_banner.php';
       case '1':////////////////////////////// discount ///////////////////////////////
         $show_discount = $show_promotion_info['discount_value'];
         echo "<li class='list-group-item'>折扣:".$show_discount."％</li>";
-        echo "<li class='list-group-item'>零售价格(CAD):$".$current_product['pro_o_price']."</li>";
+        echo "<li class='list-group-item'><del>零售价格(CAD):$".$current_product['pro_o_price']."</del></li>";
+        $discount_price = intval(intval($current_product['pro_o_price']) * intval($show_promotion_info['discount_value'])*0.01);
+        echo "<li class='list-group-item'><h4 class='text-danger'>折扣价格(CAD):$".$discount_price."</h4></li>";
         echo "<input type='hidden' value='$current_promition_id' name='notice_promotion'>";
        // echo "<input type='hidden' value = '1' name = 'pro_type'>";
 

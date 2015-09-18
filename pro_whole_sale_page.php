@@ -22,9 +22,10 @@ include 'promotion_function.php';
 
      $query_buy_get = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where promotion_enabled = '1' and whole_sale = '0'";
      $query_buy_get = mysqli_query($db_connect,$query_buy_get);
+    echo "<div class='col-lg-10'></div>";
      show_product($query_buy_get);
 
-
+    
 
 
 
