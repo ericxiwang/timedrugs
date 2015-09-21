@@ -83,7 +83,7 @@ function load_page(){
 		}
 
 
-		echo "<td style='width:10%'><input name = 'select_id[]' type='checkbox' value = '$one_product[promotion_id]'></td>";
+		echo "<td style='width:10%'>$one_product[promotion_id]</td>";
 
 		echo "<td style='width:12%'>";
 		select_promotion($one_product['promotion_id'],$one_product['pro_code']);

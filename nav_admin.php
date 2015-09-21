@@ -78,6 +78,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
           <a href="manage/product_upload.php" target="iframe_1">上传产品</a><br/>
           <a href="manage/product_edit.php" target="iframe_1">编辑产品</a><br/>
+          <a href="manage/product_recommend.php" target="iframe_1">产品推荐编辑</a><br/>
 
       </div>
     </div>

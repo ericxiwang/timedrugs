@@ -16,7 +16,7 @@ include 'promotion_function.php';
       <!-- one inventory unit -->
 
      <?php
-     $query_all_pro  = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where pro_onsell='1' ";
+     $query_all_pro  = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where pro_recommend='1' ";
      $all_products = mysqli_query($db_connect,$query_all_pro);
      
 
