@@ -52,9 +52,17 @@ ol.vertical li{
 <body>
 
 <script type="text/javascript">
+
 	
 $(function  () {
-  $("ol.example").sortable();
+
+	// get value from ul //
+
+
+
+
+
+$("ol.example").sortable();
 
 
 var adjustment;
@@ -72,6 +80,23 @@ $("ol.simple_with_animation").sortable({
       $clonedItem.detach();
       _super($item, container);
     });
+    var newNums = [];
+    var nums = document.getElementById("recommend_list");
+
+	var listItem = nums.getElementsByTagName("li");
+
+
+
+   	document.getElementById("hidden_list").value = listItem.length; 
+   	
+   	for (var i=0; i < listItem.length; i++) {
+    var num = listItem[i].id;
+    
+        newNums.push( num );
+  
+}
+
+   	document.getElementById("hidden_list1").value = newNums; 
   },
 
   // set $item relative to cursor position
@@ -92,7 +117,25 @@ $("ol.simple_with_animation").sortable({
       top: position.top - adjustment.top
     });
   }
+
+  
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 </script>
 <?php
@@ -110,12 +153,12 @@ $recommend_query = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_in
 
 	<div class = 'col-lg-4' >
 
-            <div class='span4 panel panel-primary'>
+            <div id='re_resource' class='span4 panel panel-primary'>
               <ol class='simple_with_animation vertical'>
                <?php
 
                foreach ($recommend_query as $one_product) {
-               	echo "<li name='$one_product[pro_code]' >";
+               	echo "<li id='$one_product[pro_code]' name='$one_product[pro_code]'>";
                	echo" <img src='../$one_product[pro_img]' height=100 width=100>";
 
                	echo "<div class='btn'>".$one_product['pro_name']."</div>";
@@ -135,11 +178,13 @@ $recommend_query = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_in
             <div class='span4 panel panel-info'>
             <p>拖拽到此以添加推荐</p>
   
-              <ol class='simple_with_animation vertical'>
+              <ol id = 'recommend_list' class='simple_with_animation vertical'>
 
                
           
               </ol>
+              <input id = 'hidden_list' name='hidden_list' type='text' value=''/>
+              <input id = 'hidden_list1' name='hidden_list1' type='text' value=''/>
             </div>
           </div>
         </div>
@@ -159,13 +204,23 @@ function update_recommed(){
 	if (isset($_POST['pro_code'])){
 
 
-		echo "AAAAA";
+		echo $_POST['hidden_list1'];
+		
+		$a = $_POST['hidden_list1'];
+		$c = explode(",", $a);
+		echo gettype($c);
+
+		foreach ($c as $d) {
+
+			echo "$$".$d."<br/>";
+			# code...
+		}
 	}
 
 
 
 }
-
+update_recommed();
 
 ?>
 
