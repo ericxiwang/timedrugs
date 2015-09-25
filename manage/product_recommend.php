@@ -80,23 +80,30 @@ $("ol.simple_with_animation").sortable({
       $clonedItem.detach();
       _super($item, container);
     });
+
+    /////////////////////////////////////////////////////////
     var newNums = [];
     var nums = document.getElementById("recommend_list");
 
-	var listItem = nums.getElementsByTagName("li");
+	   var listItem = nums.getElementsByTagName("li");
 
 
 
-   	document.getElementById("hidden_list").value = listItem.length; 
+
+
+   	//document.getElementById("hidden_list").value = listItem.length; 
+
    	
-   	for (var i=0; i < listItem.length; i++) {
-    var num = listItem[i].id;
+     	for (var i=0; i < listItem.length; i++) 
+      {
+         
+          var num = listItem[i].id;
+      
+          newNums.push( num );
     
-        newNums.push( num );
-  
-}
+      }
 
-   	document.getElementById("hidden_list1").value = newNums; 
+   	document.getElementById("hidden_list").value = newNums; 
   },
 
   // set $item relative to cursor position
@@ -139,9 +146,12 @@ $("ol.simple_with_animation").sortable({
 });
 </script>
 <?php
-$recommend_query = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_info";
-          $recommend_query = mysqli_query($db_connect,$recommend_query);
+$recommend_query_left = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_info";
+$recommend_query_left = mysqli_query($db_connect,$recommend_query_left);
           //$recommend_query = mysqli_fetch_assoc($recommend_query);
+
+$recommend_query_right = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_info where pro_recommend != '0' order by pro_recommend";
+$recommend_query_right = mysqli_query($db_connect,$recommend_query_right);
 
 ?>
 
@@ -157,12 +167,12 @@ $recommend_query = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_in
               <ol class='simple_with_animation vertical'>
                <?php
 
-               foreach ($recommend_query as $one_product) {
-               	echo "<li id='$one_product[pro_code]' name='$one_product[pro_code]'>";
-               	echo" <img src='../$one_product[pro_img]' height=100 width=100>";
+               foreach ($recommend_query_left as $one_product_left) {
+               	echo "<li id='$one_product_left[pro_code]' name='$one_product_left[pro_code]'>";
+               	echo" <img src='../$one_product_left[pro_img]' height=100 width=100>";
 
-               	echo "<div class='btn'>".$one_product['pro_name']."</div>";
-               	echo "<input name = 'pro_code' type= hidden value = '$one_product[pro_code]'/>";
+               	echo "<div class='btn'>".$one_product_left['pro_name']."</div>";
+               	echo "<input name = 'pro_code' type= hidden value = '$one_product_left[pro_code]'/>";
                	echo "</li>";
                	# code...
                }
@@ -179,12 +189,24 @@ $recommend_query = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_in
             <p>拖拽到此以添加推荐</p>
   
               <ol id = 'recommend_list' class='simple_with_animation vertical'>
+               <?php
+
+               foreach ($recommend_query_right as $one_product_right) {
+                echo "<li id='$one_product_right[pro_code]' name='$one_product_right[pro_code]'>";
+                echo" <img src='../$one_product_right[pro_img]' height=100 width=100>";
+
+                echo "<div class='btn'>".$one_product_right['pro_name']."</div>";
+                echo "<input name = 'pro_code' type= hidden value = '$one_product_right[pro_code]'/>";
+                echo "</li>";
+                # code...
+               }
+               ?>
 
                
           
               </ol>
-              <input id = 'hidden_list' name='hidden_list' type='text' value=''/>
-              <input id = 'hidden_list1' name='hidden_list1' type='text' value=''/>
+              <input id = 'hidden_list' name='hidden_list' type='hidden' value=''/>
+             
             </div>
           </div>
         </div>
@@ -200,20 +222,35 @@ $recommend_query = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_in
 <?php
 
 function update_recommed(){
+  global $db_connect;
 
 	if (isset($_POST['pro_code'])){
 
 
-		echo $_POST['hidden_list1'];
 		
-		$a = $_POST['hidden_list1'];
-		$c = explode(",", $a);
-		echo gettype($c);
+		
+		$product_array = $_POST['hidden_list'];
+		$product_array = explode(",", $product_array);
 
-		foreach ($c as $d) {
+    $reset_recommed = "UPDATE product_info SET pro_recommend = '0'";
+    $reset_recommed = mysqli_query($db_connect,$reset_recommed);
 
-			echo "$$".$d."<br/>";
-			# code...
+
+		foreach ($product_array as $key => $one_product) {
+
+			if($one_product != ''){
+
+       // echo "|".$key."|".$one_product."<br/>";
+
+
+
+        $update_recommed = "UPDATE product_info SET pro_recommend = '$key' WHERE pro_code = '$one_product'";
+        $update_recommed = mysqli_query($db_connect,$update_recommed);
+
+    
+
+      }
+      header("Location: product_recommend.php");
 		}
 	}
 
