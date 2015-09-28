@@ -104,6 +104,7 @@ $("ol.simple_with_animation").sortable({
       }
 
    	document.getElementById("hidden_list").value = newNums; 
+    document.getElementById('submit_recommend').disabled=false;
   },
 
   // set $item relative to cursor position
@@ -146,7 +147,8 @@ $("ol.simple_with_animation").sortable({
 });
 </script>
 <?php
-$recommend_query_left = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_info";
+///////////////search products which are not include recommend list /////////////////////////////////
+$recommend_query_left = "SELECT pro_name,pro_img,pro_o_price,pro_code from product_info where pro_recommend = '0'";
 $recommend_query_left = mysqli_query($db_connect,$recommend_query_left);
           //$recommend_query = mysqli_fetch_assoc($recommend_query);
 
@@ -161,7 +163,7 @@ $recommend_query_right = mysqli_query($db_connect,$recommend_query_right);
 <div class='row'>
 <form method = 'POST' action='product_recommend.php' >
 
-	<div class = 'col-lg-4' >
+	<div class = 'col-lg-4' style='height:100%;overflow-y:scroll;'>
 
             <div id='re_resource' class='span4 panel panel-primary'>
               <ol class='simple_with_animation vertical'>
@@ -179,10 +181,10 @@ $recommend_query_right = mysqli_query($db_connect,$recommend_query_right);
                ?>
               </ol>
             </div>
-            </div>
-          <div class = 'col-lg-4' >
+  </div>
+  <div class = 'col-lg-4' >
 
-
+            <input class='btn btn-danger' id = 'submit_recommend' type=submit value='提交修改' disabled>
 
 
             <div class='span4 panel panel-info'>
@@ -208,15 +210,15 @@ $recommend_query_right = mysqli_query($db_connect,$recommend_query_right);
               <input id = 'hidden_list' name='hidden_list' type='hidden' value=''/>
              
             </div>
-          </div>
-        </div>
+      </div>
+</div>
 	
             
              
 	
 
 	</div>
-	<input class='btn btn-success' type=submit value=ok>
+	
 </form>
 
 <?php
