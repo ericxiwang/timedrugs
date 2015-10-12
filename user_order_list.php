@@ -13,7 +13,8 @@ $get_user_account = $get_user_account['0'];
 ////////////////////////////// new status is the highest prority to displayed ///////////////////
 
 
-$order_list_query = "SELECT ord_uuid,ord_datetime,ord_amount,ord_status FROM ord_record WHERE ord_email='$get_user_account' and ord_status='new'";
+//$order_list_query = "SELECT ord_uuid,ord_datetime,ord_amount,ord_status FROM ord_record WHERE ord_email='$get_user_account' and ord_status='new'";
+$order_list_query = "SELECT ord_uuid,ord_datetime,ord_amount,ord_status FROM ord_record WHERE ord_email='$get_user_account' ";
 $db_execute = mysqli_query($db_connect,$order_list_query);
 
 
@@ -57,7 +58,7 @@ $pro_code = $_POST['check_order'];
 $query_one_order = "SELECT pro_name,pro_img,pro_o_price,pro_m_price,pro_quantity,pro_amount,pro_pro_type FROM ord_product WHERE ord_uuid = '$pro_code'";
 $query_one_order = mysqli_query($db_connect,$query_one_order);
 
-$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee FROM ord_record WHERE ord_uuid ='$pro_code' ";
+$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status FROM ord_record WHERE ord_uuid ='$pro_code' ";
 $order_basic_info = mysqli_query($db_connect,$order_basic_info);
 $order_basic_info = mysqli_fetch_assoc($order_basic_info);
 
@@ -121,7 +122,43 @@ echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
 echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td>";
 
 echo "</table>";
+
+
+
+//////////////////////////////////payment for new order //////////////////////////////////////////
+
+
+
+
+if ($order_basic_info['ord_status'] == 'new'){
+
+echo "<div class='progress active' style='height:40px'>";
+  
+echo  "<div class='progress-bar progress-bar-success' style='width:25%;padding:10px'>";
+echo  	"<span class='glyphicon glyphicon-ok'>订单提交</span></div>";
+
+echo "<div class='progress-bar  progress-bar-warning progress-bar-striped' role='progressbar' style='width: 25%;padding:10px'>确认付款</div><div class='progress-bar  progress-bar-warning progress-bar-striped' role='progressbar' style='width: 25%;padding:10px'>货物已发</div>";
+
+
+echo "<div class='progress-bar  progress-bar-warning progress-bar-striped' role='progressbar' style='width: 25%;padding:10px'>订单关闭</div></div>";
+
+
+
+}
+else{
+
+
+}
+
+
+//////////////////////////  end   /////////////////////////////
+
 echo "<br/><div class='col-lg-12 text-center'><a href='user_order_list.php' role='button' class='btn btn-danger'>返回列表</a></div><br/><br/><br/>";
+
+
+
+
+
 }
 
 }  //////////functino selected order end //////////////

@@ -60,7 +60,7 @@ if (isset($_POST['hidden_amount'])) {
 
 	foreach ($_SESSION['cart_list'] as $show_each) {
 
-		echo "##".$show_each['pro_type'];
+		//echo "##".$show_each['pro_type'];
 		if (!(isset($show_each['m_price']))){
 			$show_each['m_price'] = $show_each['pro_o_price'];
 		}
@@ -96,6 +96,12 @@ if (isset($_POST['hidden_amount'])) {
 	}
 
 	unset($_SESSION['cart_list']);///////clear session 'cart list' after all products has been submitted into database///////
+
+
+	
+
+return array($ord_code,$ord_amount,$ord_user);
+
 	
 	
 }

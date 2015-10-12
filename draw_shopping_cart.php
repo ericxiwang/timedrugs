@@ -103,17 +103,17 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 			
 			elseif ($single_product['pro_type'] == '2'){
 
-			echo $single_product['pro_o_price'];
+			echo "$".$single_product['pro_o_price'];
 			}
 
 			elseif ($single_product['pro_type'] == '4'){
-				echo $single_product['pro_o_price'];
+				echo "$".$single_product['pro_o_price'];
 			}
 			
 			else
 			{
 
-				echo $single_product['pro_o_price'];			
+				echo "$".$single_product['pro_o_price'];			
 			}
 
 			
@@ -126,12 +126,12 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 
 			if ($single_product['pro_type'] == '4'){
 
-				echo $single_product['whole_price'];
+				echo "$".$single_product['whole_price'];
 				echo "<p>免运费！</p>";
 			}
 			else{
 
-				echo $single_product['whole_price'];
+				echo "$".$single_product['whole_price'];
 			}
 			
 			
@@ -261,14 +261,14 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 
 			elseif ($single_product['pro_type'] == '2'){
 
-			echo $single_product['pro_o_price'];
+			echo "$".$single_product['pro_o_price'];
 			}
 			elseif ($single_product['pro_type'] == '4'){
-				echo $single_product['pro_o_price'];
+				echo "$".$single_product['pro_o_price'];
 			}
 			else{
 
-				echo $single_product['pro_o_price'];
+				echo "$".$single_product['pro_o_price'];
 			}
 
 
@@ -285,12 +285,12 @@ foreach ($_SESSION['cart_list'] as $single_product) {
 			
 			if ($single_product['pro_type'] == '4'){
 
-				echo $single_product['whole_price'];
+				echo "$".$single_product['whole_price'];
 				echo "<p>免运费！</p>";
 			}
 			else{
 
-				echo $single_product['whole_price'];
+				echo "$".$single_product['whole_price'];
 			}
 		echo "</td>";
 		//echo "<td>";//产品总重
