@@ -115,13 +115,13 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
    <!-- 轮播（Carousel）项目 -->
      <div class="carousel-inner">
         <div class="item active">
-           <img id="slider1" src="image/slide_1.jpg" alt="First slide" style="width:100%">
+           <img id="slider1" src="image/slide_1.png" alt="First slide" style="width:100%">
         </div>
         <div class="item">
-           <img id="slider1" src="image/slide_2.jpg" alt="Second slide" style="width:100%">
+           <img id="slider1" src="image/slide_2.png" alt="Second slide" style="width:100%">
         </div>
         <div class="item">
-           <img id="slider1" src="image/slide_3.jpg" alt="Third slide" style="width:100%">
+           <img id="slider1" src="image/slide_3.png" alt="Third slide" style="width:100%">
         </div>
      </div>
        <!-- 轮播（Carousel）导航
