@@ -175,24 +175,20 @@ include 'nav_menu_banner.php';
         </div>
       </div>";
    // load relevant info from other table   
+  echo "<div class='col-md-9 col-lg-9 panel panel-danger product_des' style='height:240px'>产品描述";
 
-  echo "<textarea class = 'form-control' rows='10' name='pro_des' style='border=0px'>";
+
+  echo "<textarea class = 'form-control' rows='9' name='pro_des' style='border: none;resize: none;
+    outline: none;background-color: transparent;' >";
 
   
   echo $current_product ['pro_description'];
   echo "</textarea>";
 
-  echo "</div>
 
-      </div>  
-      <div class='col-md-9 col-lg-9 panel panel-danger product_des'>相关产品</div>  
+  echo "</div>";
 
-      <div class='col-md-9 col-lg-9 panel panel-danger product_des'>用户反馈</div>  
-      
-     
-    
-      
-    </div></form>";
+  echo "</form>";
 
 
 
