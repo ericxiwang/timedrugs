@@ -70,7 +70,7 @@ include 'nav_menu_banner.php';
         <div class='col-md-5 col-lg-5 panel panel-danger order-page text-danger' style='text-align:center'>";
   echo "<h3>".$current_product['pro_name']."</h3>";
 
-  echo "<img class='img-thumbnail preview-pic' src='$current_product[pro_img]' style='height:80%;width:100%'/></div>";
+  echo "<img class='img-thumbnail preview-pic' src='$current_product[pro_img]' style='height:85%;width:85%'/></div>";
 
   echo "<div class='col-md-4 col-lg-4 panel panel-danger order-page'>";
   echo "<ul class='list-group'>";
@@ -175,9 +175,12 @@ include 'nav_menu_banner.php';
         </div>
       </div>";
    // load relevant info from other table   
-  echo "<div class='col-md-9 col-lg-9 panel panel-danger product_des'>产品描述
-        <div>";
+
+  echo "<textarea class = 'form-control' rows='10' name='pro_des' style='border=0px'>";
+
+  
   echo $current_product ['pro_description'];
+  echo "</textarea>";
 
   echo "</div>
 

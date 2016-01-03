@@ -143,8 +143,13 @@ echo "<select name = 'select_string[$pro_code]' class='form-control' onchange='c
 		case 4:
 		echo "<option value='$current_promotion[promotion_id]'>免运费</option>";
 		break;
+
+		default:
+		echo "<option value='none'>无促销</option>";
+		break;
 	}
 foreach ($promotion_list as $one_promotion) {
+
 	switch ($one_promotion['pro_type']){
 
 		case 1:
@@ -156,6 +161,10 @@ foreach ($promotion_list as $one_promotion) {
 		case 4:
 		echo "<option value='$one_promotion[promotion_id]'>免运费</option>";
 		break;
+		default:
+		echo "<option value='none'>无促销</option>";
+		break;
+
 	}
 	}
 	# code...

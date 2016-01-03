@@ -45,6 +45,7 @@ function pro_update()
 		$pro_code		=	$_POST['pro_code'];
 		$pro_img		=	$_POST['img_code'];
 		$pro_onsell		=	$_POST['pro_onsell'];
+		$pro_des 		= 	$_POST['pro_des'];
 
 		//echo "@".$pro_name."@".$pro_o_price."@".$pro_o_price."@".$pro_brand."@".$pro_weight."@".$pro_category."@".$pro_spec;
 
@@ -56,7 +57,8 @@ function pro_update()
 			or (empty($_POST['pro_category'])) 
 			or (empty($_POST['pro_spec'])))
 		{
-			echo "failed";
+			//echo "failed";
+			echo "产品信息不完整，请重新填写";
 		}
 		else  ///////////execute data update process //////////
 		{	
@@ -70,7 +72,8 @@ function pro_update()
 							pro_o_price		= '$pro_o_price',
 							pro_weight 		= '$pro_weight',
 							pro_spec 		= '$pro_spec',
-							pro_onsell 		= '$pro_onsell'
+							pro_onsell 		= '$pro_onsell',
+							pro_description = '$pro_des'
 
 							WHERE pro_code='$pro_code'";
 
@@ -262,6 +265,18 @@ function load_page(){
 		echo "<label>当前图片:</label><br/>";
 		echo "<img src='../$edit_pro[pro_img]' class='img-thumbnail'>";
 		echo "<label>上传新图片:</label><input class='form-control' type='file' name = 'pro_img'>";
+
+		echo "产品描述:<textarea class = 'form-control' rows='5' name='pro_des'>";
+		echo $edit_pro['pro_description'];
+		echo "</textarea>";
+
+
+
+
+
+
+
+
 		if ($edit_pro['pro_onsell'] == '1')
 		{
 			echo "<div class='checkbox'>";
