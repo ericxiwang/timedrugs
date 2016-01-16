@@ -170,7 +170,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
               <a class="btn btn-success menu glyphicon glyphicon-thumbs-up" role="button" href="page_re.php">&nbsp;精品推荐</a>
               <a class="btn btn-success menu glyphicon glyphicon-usd" role="button" href="pro_whole_sale_page.php">&nbsp;促销活动</a>
        
-              <a class="btn btn-success menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;抗癌网资讯</a>
+              <a class="btn btn-success menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;产品细分</a>
               <a class="btn btn-success menu glyphicon glyphicon-map-marker" role="button" href="sites.php">&nbsp;经销网点</a>
               <a class="btn btn-success  menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>
               <a class="btn btn-success menu glyphicon glyphicon-shopping-cart" role="button" href="#">&nbsp;订购指南</a>
