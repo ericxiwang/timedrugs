@@ -42,7 +42,8 @@ global $db_connect;
 $last_name		= $_POST['last_name'];
 $first_name 	= $_POST['first_name'];
 $email 			= $_POST['email'];
-$psw_encrypt 	= md5($_POST['password']);
+//$psw_encrypt 	= md5($_POST['password']);
+$psw_encrypt 	= $_POST['password'];
 
 
 

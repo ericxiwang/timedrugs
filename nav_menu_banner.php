@@ -61,7 +61,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
        
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;好时光官方微博</a>
+        <a href="http://www.weibo.com/beimeihaoshiguang" target="_blank"><span class="glyphicon glyphicon-globe"></span>&nbsp;好时光官方微博</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
 
@@ -84,12 +84,12 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 <div class='container'>
   <div class='col-lg-12 panel panel-danger' style="height:120px;padding:0px;background:url('image/top.png')" >
 
-  <form class="navbar-form" role="search">
+  <form class="navbar-form" role="search" method="post" action = "search_result.php">
   <div class="col-lg-10" style='padding-left:30%;padding-top:3%'>
     <div class="input-group" >
-      <input type="text" class="form-control" placeholder="输入商品关键字..." size=40>
+      <input name = 'search' type="text" class="form-control" placeholder="输入商品关键字..." size=40>
       <span class="input-group-btn">
-        <button class="btn btn-danger" type="button">搜索</button>
+        <button type='submit' class="btn btn-danger" type="button">搜索</button>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
@@ -172,8 +172,8 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
        
               <a class="btn btn-success menu glyphicon glyphicon-heart-empty" role="button" href="cantri.php">&nbsp;产品细分</a>
               <a class="btn btn-success menu glyphicon glyphicon-map-marker" role="button" href="sites.php">&nbsp;经销网点</a>
-              <a class="btn btn-success  menu glyphicon glyphicon-user" role="button" href="#">&nbsp;关于我们</a>
-              <a class="btn btn-success menu glyphicon glyphicon-shopping-cart" role="button" href="#">&nbsp;订购指南</a>
+              <a class="btn btn-success  menu glyphicon glyphicon-user" role="button" href="about_us.php">&nbsp;关于我们</a>
+              <a class="btn btn-success menu glyphicon glyphicon-shopping-cart" role="button" href="wizard.php">&nbsp;订购指南</a>
               
               
               

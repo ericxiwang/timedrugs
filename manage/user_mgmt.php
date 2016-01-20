@@ -15,6 +15,7 @@ global $db_connect;
 
 	if (!isset($_POST['submit_edit'])){
 		$user_list = "SELECT first_name,last_name,email,actived from user_info";
+
 		$user_list = mysqli_query($db_connect,$user_list);
 		echo "<table class='table table-condensed'>";
 		echo "<tr><thead><th>姓名</th><th>电子邮件</th><th>激活状态</th>";
@@ -53,10 +54,11 @@ global $db_connect;
 		$index_email = $_POST['submit_edit'];
 		/////////////////////////////////////////// get user info ////////////////
 		$user_info = "SELECT first_name,last_name,email,actived from user_info where email = '$index_email'";
+
 		$user_info = mysqli_query($db_connect,$user_info);
 		$user_info = mysqli_fetch_assoc($user_info);
 		////////////////////////////////////////// get user extra info /////////////////
-		$user_extra_info = "SELECT user_country,user_province,user_postcode,user_mailing_address,user_phone from user_extra_info where user_email='$index_email'";
+		$user_extra_info = "SELECT user_country,user_province,user_city,user_postcode,user_mailing_address,user_phone from user_extra_info where user_email='$index_email'";
 		$user_extra_info = mysqli_query($db_connect,$user_extra_info);
 		$user_extra_info = mysqli_fetch_assoc($user_extra_info);
 
@@ -65,18 +67,21 @@ global $db_connect;
 		echo "<div class='col-lg-12'>";
 
 		echo "<table class='table table-condensed table-bordered'>";
-		echo "<tr class='info' align='center'> <td>姓</td> <td>名</td> <td>电子邮件</td> </tr>";
+		echo "<tr class='info' align='center'> <td>姓</td> <td>名</td> <td colspan='2'>电子邮件</td> </tr>";
 		echo "<tr align='center'>";
 		echo "<td> <input class='form-control' name = 'last_name' 	type='text' 	value = '$user_info[last_name]'> 	</td>";
 		echo "<td> <input class='form-control' name = 'first_name' 	type='text' 	value = '$user_info[first_name]'>	</td>";
-		echo "<td> <input class='form-control' name = 'email' 		type='text' 	value = '$user_info[email]'> 		</td>";
+		echo "<td colspan='2'> <input class='form-control'  name = 'email' 		type='text' 	value = '$user_info[email]'> 		</td>";
+
 		echo "</tr>";
 
-		echo "<tr class='info' align='center'> <td>国家</td> <td>省/市</td> <td>邮寄地址</td> </tr>";
+		echo "<tr class='info' align='center'> <td>国家</td> <td>省</td> <td>市</td> <td>邮寄地址</td> </tr>";
 
 		echo "<tr align='center'>";
 		echo "<td><input class='form-control' name = 'user_country' type = 'text' value='$user_extra_info[user_country]'></td>";
 		echo "<td><input class='form-control' name = 'user_province' type = 'text' value='$user_extra_info[user_province]'></td>";
+		echo "<td><input class='form-control' name = 'user_city' type = 'text' value='$user_extra_info[user_city]'></td>";
+
 		echo "<td><input class='form-control' name = 'user_mailing_address' type = 'text' value='$user_extra_info[user_mailing_address]' size=100></td>";
 		echo "</tr>";
 

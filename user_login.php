@@ -72,7 +72,8 @@ elseif (isset($_POST['user_email'])){
   global $db_connect;
 
   $current_user = $_POST['user_email'];
-  $current_password = md5($_POST['user_password']);
+  //$current_password = md5($_POST['user_password']);
+  $current_password = $_POST['user_password'];
 
   $check_user = "SELECT email,user_password,first_name,last_name from user_info where email='$current_user'";
   $execute_login = mysqli_query($db_connect,$check_user);
