@@ -3,6 +3,9 @@ include 'nav_menu_banner.php';
 ?>
     <!--nav end -->
 
+<script src="bootstrap/js/bootstrap-magnify.min.js"></script>
+<link rel="stylesheet" href="bootstrap/css/bootstrap-magnify.min.css">
+
 <script>
         $(function(){
             var t = $("#text_box");
@@ -70,7 +73,7 @@ include 'nav_menu_banner.php';
         <div class='col-md-5 col-lg-5 panel panel-danger order-page text-danger' style='text-align:center'>";
   echo "<h3>".$current_product['pro_name']."</h3>";
 
-  echo "<img class='img-thumbnail preview-pic' src='$current_product[pro_img]' style='height:85%;width:85%'/></div>";
+  echo "<img data-toggle='magnify' class='img-thumbnail preview-pic' src='$current_product[pro_img]' style='height:85%;width:85%'/></div>";
 
   echo "<div class='col-md-4 col-lg-4 panel panel-danger order-page'>";
   echo "<ul class='list-group'>";
