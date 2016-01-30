@@ -12,6 +12,8 @@ $mail             = new PHPMailer();
 $body             = file_get_contents('contents.html');
   
 $body             = eregi_replace("[\]",'',$body);
+
+$SMTPDebug = 3;
   
 //设置smtp参数
   
