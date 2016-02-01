@@ -1,6 +1,6 @@
 <?php
 
-
+include('ord_mail.php');
 function ord_to_db(){
 $ord_datetime = time();
 global $db_connect;
@@ -95,6 +95,8 @@ if (isset($_POST['hidden_amount'])) {
 
 	}
 
+	order_email('1',$ord_code,$ord_amount);
+
 	unset($_SESSION['cart_list']);///////clear session 'cart list' after all products has been submitted into database///////
 
 
@@ -113,4 +115,6 @@ elseif (!(isset($_POST['total_price']))) {
 
 
 }
+
+
 ?>

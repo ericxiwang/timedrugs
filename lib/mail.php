@@ -6,10 +6,10 @@ include("class.phpmailer.php");
 include("class.smtp.php");
   
 //获取一个外部文件的内容
-  
+function order_email(){
 $mail             = new PHPMailer();
   
-$body             = file_get_contents('contents.html');
+$body             = file_get_contents('contents.php');
   
 $body             = eregi_replace("[\]",'',$body);
 
@@ -82,5 +82,5 @@ if(!$mail->Send()) {
   echo "Message has been sent";
   
 }
-
+}
 ?>

@@ -2,6 +2,7 @@
 include 'nav_menu_banner.php';
 require 'uuid_gen.php';
 require 'ord_to_db.php';
+
 ?>
 <div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:right;padding-top:15px;'>
 <?php
