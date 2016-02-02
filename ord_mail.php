@@ -21,7 +21,7 @@ $html_content.="<tr>"."<td>".$cart_list['pro_name']."</td>"."<td>".$cart_list["q
 }
 $total_price = (string)$ord_amount;
 
-print_r($cart_list);
+//print_r($cart_list);
 
 
 $mail             = new PHPMailer();
@@ -107,7 +107,7 @@ if(!$mail->Send()) {
   
 } else {
   
-  echo "Message has been sent";
+  echo "订单确认邮件已发送，请查收！";
   
 }
 }

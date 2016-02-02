@@ -16,20 +16,21 @@ if (isset($_POST['hidden_amount'])) {
 	$ord_amount = $_POST['hidden_amount'];
 	$ord_code = getguid();
 	################### insert into ##################
-	//print_r($current_user);
+
 	$ord_user = $current_user[1]." ".$current_user[2];
 	$ord_email = $current_user[0];
-	#echo $ord_email;
+
 	//////////////get user mailing address post code and full name
 	
 	$mailing_address = $_POST['full_address'];
 	$mailing_address = urldecode($mailing_address);
-	//echo $mailing_address;
+
 
 
 	$post_code = $_POST['post_code'];
 	//$full_name = $_POST['full_name'];
 	$shipping_fee = $_POST['shipping_fee'];
+	$shipping_method = $_POST['shipping_method'];
 
 	$add_to_ord_record = "INSERT INTO ord_record 
 								(ord_uuid,
@@ -40,7 +41,8 @@ if (isset($_POST['hidden_amount'])) {
 									ord_email,
 									ord_address,
 									ord_postcode,
-									ord_shipping_fee) 
+									ord_shipping_fee,
+									ord_shipping_method) 
 						VALUES ('$ord_code',
 									now(),
 									'$ord_amount',
@@ -49,7 +51,8 @@ if (isset($_POST['hidden_amount'])) {
 									'$ord_email',
 									'$mailing_address',
 									'$post_code',
-									'$shipping_fee')";
+									'$shipping_fee',
+									'$shipping_method')";
 
 	$db_execute = mysqli_query($db_connect,$add_to_ord_record);
 	#echo "hha";

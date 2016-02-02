@@ -73,13 +73,14 @@ $_SESSION['submit_enabled']='0';
 }
 
 ?>
-
+点击Paypal支付
+<button type='submit'><img border='0' src='image/PAYPAL-LOGOS.jpg' width="200" height="40" /></button>
 </div>
 
 
 
 
-<button type='submit'><img border='0' src='image/paypal.jpg'/></button>
+
 
 
 </form>

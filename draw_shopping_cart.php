@@ -311,7 +311,7 @@ $query_user = mysqli_query($db_connect,$query_user);
 $query_user  = mysqli_fetch_assoc($query_user);
 //////////////////////////////////////// load end //////////////////////////
 $tax_shipping_display = tax_rate_shipping_fee($query_user['user_country']);
-echo "<input type='hidden' id='tax_rate' value='$tax_shipping_display[0]'>";
+echo "<input type='hidden' id='tax_rate' value='$tax_shipping_display[0]'/>";
 
 
 
@@ -368,6 +368,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 				
 				if ($shipping_method['shipping_type'] == 'common')
 				{
+				echo "<input type='hidden' value='common' name='shipping_method'/>";
 				echo "<div class='radio'>";
 					if ($total_weight <=1 ){
 						$shipping_fee_option = $shipping_method['shipping_basefee'];
@@ -394,7 +395,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 				//////////////////////////extra shipping ///////////
 				elseif ($shipping_method['shipping_type'] == 'extra')
 				{
-
+				echo "<input type='hidden' value='extra' name='shipping_method'/>";
 				echo "<div class='radio'>";
 				
 					if ($total_weight <= 1)
@@ -415,7 +416,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 	}
 
 }
-if ($query_user['user_country'] == 'Canada') {
+if ($query_user['user_country'] = "Canada") {
 	echo "</td><td>";
 	draw_radio('Canada',$tax_shipping_display[1],$total_weight);
 
@@ -423,14 +424,14 @@ if ($query_user['user_country'] == 'Canada') {
 }
 
 
-elseif($query_user['user_country'] == 'China'){
+elseif($query_user['user_country'] = "China"){
 	//echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
 	echo "</td><td>";
 	draw_radio('China',$tax_shipping_display[1],$total_weight);
 
 	echo "</td>";
 }
-elseif($query_user['user_country'] == 'USA'){
+elseif($query_user['user_country'] = "USA"){
 	//echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
 	echo "</td><td>";
 	draw_radio('USA',$tax_shipping_display[1],$total_weight);
@@ -467,7 +468,8 @@ elseif($query_user['user_country'] == 'USA'){
 */
 else
 {
-	echo "error";
+	echo "error!";
+	echo $query_user['user_country'];
 }
 
 echo "</tr>";
@@ -523,7 +525,7 @@ echo "</td></tr>";
 echo "</tbody>";
 echo "</table>";
 $full_name = strval($current_user_info[1]) . strval($current_user_info[2]);
-echo "<input name='full_name' type = hidden value = $full_name>";
+echo "<input name='full_name' type = hidden value = $full_name/>";
 #echo "<input type = hidden value = $query_user['user_country']>";
 //echo $query_user['user_mailing_address'];
 $full_address = $query_user['user_country']." ".$query_user['user_province']." ".$query_user['user_mailing_address'];  /////////// generate full address string ///////////
@@ -531,7 +533,7 @@ $full_address = $query_user['user_country']." ".$query_user['user_province']." "
 $full_address = urlencode($full_address);
 
 
-echo "<input name = 'full_address' type = hidden value = $full_address>";
+echo "<input name = 'full_address' type = hidden value = $full_address/>";
 echo "<input name = 'post_code' type = hidden value = $query_user[user_postcode]>";
 }
 else

@@ -58,7 +58,7 @@ $pro_code = $_POST['check_order'];
 $query_one_order = "SELECT pro_name,pro_img,pro_o_price,pro_m_price,pro_quantity,pro_amount,pro_pro_type FROM ord_product WHERE ord_uuid = '$pro_code'";
 $query_one_order = mysqli_query($db_connect,$query_one_order);
 
-$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status FROM ord_record WHERE ord_uuid ='$pro_code' ";
+$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status,ord_shipping_method FROM ord_record WHERE ord_uuid ='$pro_code' ";
 $order_basic_info = mysqli_query($db_connect,$order_basic_info);
 $order_basic_info = mysqli_fetch_assoc($order_basic_info);
 
@@ -119,7 +119,22 @@ echo "<td>订单总价:</td><td colspan=2>$".$order_basic_info['ord_amount']."</
 echo "<tr><td>邮寄地址:</td><td colspan=4>".$order_basic_info['ord_address']."</td></tr>";
 
 echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
-echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td>";
+echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td></tr>";
+
+if ($order_basic_info['ord_shipping_method'] = 'extra'){
+	echo"<tr><td>邮寄方式:</td><td>"."特快专递"."</td>";
+
+}
+elseif($order_basic_info['ord_shipping_method'] = 'common'){
+
+	echo"<tr><td>邮寄方式:</td><td>"."普通平邮"."</td>";
+}
+else{
+
+	echo"<tr><td>邮寄方式:</td><td>"."免邮费"."</td>";
+
+}
+
 
 echo "</table>";
 
@@ -131,7 +146,7 @@ echo "</table>";
 
 
 if ($order_basic_info['ord_status'] == 'new'){
-
+echo "<form id='f1' name='f1' runat='server'  action='https://www.paypal.com/cgi-bin/webscr'  method='post'>";
 echo "<div class='progress active' style='height:40px'>";
   
 echo  "<div class='progress-bar progress-bar-success' style='width:25%;padding:10px'>";
@@ -144,7 +159,42 @@ echo "<div class='progress-bar  progress-bar-warning progress-bar-striped' role=
 
 
 
+echo "<input type='hidden' name='cmd' value='_xclick'>";
+  echo "<input type='hidden' name='business' value='superbc@gmail.com'>";
+
+  echo "<input type='hidden' name='item_name' value= '$pro_code' >";
+  echo "<input type='hidden' name='item_number' value='1'>";
+  echo "<input type='hidden' name='amount' value='$order_basic_info[ord_amount]'>";
+  echo "<input type='hidden' name='custom' value='wang'>";
+  echo "<input type='hidden' name='invoice' value='enabled'>";
+  echo "<input type='hidden' name='no_shipping' value='1'> "; 
+  echo "<input type='hidden' name='currency_code' value='CAD'>";
+  echo "<input type='hidden' name='no_note' value='1'>";
+echo "点击Paypal支付";
+echo 	"<button type='submit'><img border='0' src='image/PAYPAL-LOGOS.jpg' width=150 height=40/></button>";
+echo "</form>";
+
 }
+elseif ($order_basic_info['ord_status'] == 'shipping') {
+
+	
+echo "<div class='progress active' style='height:40px'>";
+  
+echo  "<div class='progress-bar progress-bar-success' style='width:25%;padding:10px'>";
+echo  	"<span class='glyphicon glyphicon-ok'>订单提交</span></div>";
+
+echo "<div class='progress-bar  progress-bar-success' role='progressbar' style='width: 25%;padding:10px'>确认付款</div>
+
+	<div class='progress-bar  progress-bar-success' role='progressbar' style='width: 25%;padding:10px'>货物已发</div>";
+
+
+echo "<div class='progress-bar  progress-bar-warning progress-bar-striped' role='progressbar' style='width: 25%;padding:10px'>订单关闭</div></div>";
+
+
+
+	# code...
+}
+
 else{
 
 

@@ -39,16 +39,54 @@ else{ // if POST is not set, that means nothing to do, just draw form
 function insert_to_db(){
 
 global $db_connect;
+
+//////////////// get user basic account info //////////////
 $last_name		= $_POST['last_name'];
 $first_name 	= $_POST['first_name'];
 $email 			= $_POST['email'];
 //$psw_encrypt 	= md5($_POST['password']);
 $psw_encrypt 	= $_POST['password'];
 
+/////////////// get user extra info ////////////
 
+$user_country	=	$_POST['user_country'];
+$user_province	=	$_POST['user_province'];
+$user_city		=	$_POST['user_city'];
+$user_postcode	=	$_POST['user_postcode'];
+$user_mailing_address	=	$_POST['user_mailing_address'];
+$user_email		=	$email;
+$user_phone		=	$_POST['user_phone'];
+
+
+
+
+////////////////////////////////////////////////
 
 $user_to_db = "INSERT INTO user_info(first_name,last_name,email,user_password) VALUES ('$first_name ','$last_name','$email','$psw_encrypt')";
 $insert_user = mysqli_query($db_connect,$user_to_db);
+
+$user_extra_db = "INSERT INTO user_extra_info(
+											user_country,
+											user_province,
+											user_city,
+											user_postcode,
+											user_mailing_address,
+											user_email,
+											user_phone
+
+											) VALUES (
+
+											'$user_country ',
+											'$user_province',
+											'$user_city',
+											'$user_postcode',
+											'$user_mailing_address',
+											'$user_email',
+											'$user_phone'
+											)";
+$insert_user_extra_info = mysqli_query($db_connect,$user_extra_db);
+
+
 if(mysqli_affected_rows($db_connect) == 1){//if data was inserted successfully
 
 
@@ -114,11 +152,12 @@ elseif (mysqli_affected_rows($db_connect) == 0) {
 		<div class="form-group">
 	      	<label class="control-label col-sm-2" for="email">国家:</label>
 	      	<div class="col-md-4">
-		        <select type="se" class="form-control" id="country" >
-		        	<option >aaa</option>
-		        	<option >aaa</option>
-		        	<option >aaa</option>
-		        	<option >aaa</option>
+		        <select type="se" class="form-control" id="user_country" name='user_country'>
+		        	<option value='Canada'>加拿大</option>
+		        	<option value='China'>中国</option>
+		        	<option value='USA'>美国</option>
+		        	<!--<option value='other'>其它</option>-->
+		        	
 		        </select>
 	    	</div>
 		</div>
@@ -127,30 +166,49 @@ elseif (mysqli_affected_rows($db_connect) == 0) {
 	    	<label class="control-label col-sm-2" for="email">省/州:</label>
 	
 	      	<div class="col-md-4">
-	        <select type="se" class="form-control" id="country" >
+	      	<input type="text" class="form-control" id="user_province" name='user_province' placeholder="请输入省/州">
+	        <!--<select type="se" class="form-control" id="country" >
 	        	<option >aaa</option>
 	        	<option >aaa</option>
 	        	<option >aaa</option>
 	        	<option >aaa</option>
-	        </select>
+	        </select>-->
 	    	</div>
 	    </div>
+
 	    <div class="form-group">
-      	<label class="control-label col-sm-2" for="email">邮编:</label>
+	    	<label class="control-label col-sm-2" for="email">城市</label>
+	
+	      	<div class="col-md-4">
+	      	<input type="text" class="form-control" id="user_city" name='user_city'placeholder="请输入城市">
+	        <!--<select type="se" class="form-control" id="country" >
+	        	<option >aaa</option>
+	        	<option >aaa</option>
+	        	<option >aaa</option>
+	        	<option >aaa</option>
+	        </select>-->
+	    	</div>
+	    </div>
+
+
+
+
+	    <div class="form-group">
+      	<label class="control-label col-sm-2" >邮编:</label>
       		<div class="col-md-4">
-        	<input type="text" class="form-control" id="first_name" placeholder="你的大名？">
+        	<input type="text" class="form-control" id="user_postcode" name='user_postcode' placeholder="请输入邮编">
      		 </div>
     	</div>
     	<div class="form-group">
       	<label class="control-label col-sm-2" for="email">联系电话:</label>
       		<div class="col-md-4">
-        	<input type="text" class="form-control" id="first_name" placeholder="你的大名？">
+        	<input type="text" class="form-control" id="user_phone" name='user_phone' placeholder="请输入联系电话">
      		 </div>
     	</div>
     	<div class="form-group">
-      	<label class="control-label col-md-2" for="email">邮寄地址:</label>
+      	<label class="control-label col-md-2" >邮寄地址:</label>
       		<div class="col-md-8">
-        	<input type="text" class="form-control" id="first_name" placeholder="你的大名？">
+        	<input type="text" class="form-control" id="user_mailing_address" name='user_mailing_address' placeholder="请输入邮寄地址">
      		 </div>
     	</div>
 
