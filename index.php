@@ -36,6 +36,6 @@ include 'promotion_function.php';
 <!--inventory row end-->
   
 </div>
-
+<?php include 'footer.php';?>
 </body>
 </html>

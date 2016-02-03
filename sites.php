@@ -43,20 +43,7 @@ include 'nav_menu_banner.php';
 	</td>
 </tr>
 
-<tr>
-	<td>
-	<p>好时光健康咨询中心</p>
 
-<p>#228 5780 Cambie Street （汇丰银行旁 )</p>
-<p>Vancouver West BC</p>
-
-	</td>
-	<td>
-	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1033.872822002919!2d-123.11504457531811!3d49.232852404583625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54867470dacbbea3%3A0x1ac341b1bc47368!2s5780+Cambie+St%2C+Vancouver%2C+BC+V5Z+3A6!5e0!3m2!1sen!2sca!4v1440974318898" width="450" height="450" frameborder="0" style="border:0" allowfullscreen>
-		
-	</iframe>
-	</td>
-</tr>
 
 
 <tr>

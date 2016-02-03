@@ -37,5 +37,3 @@ include 'nav_menu_banner.php';
   
 </div>
 
-</body>
-</html>

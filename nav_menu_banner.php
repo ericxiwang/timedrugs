@@ -12,6 +12,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
     <meta charset="utf-8">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/css/index.css">
+    <link rel="stylesheet" href="bootstrap/css/footer.css">
 
     <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -250,6 +251,7 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
        
       </div> 
     </div>
+
     <!--nav end -->
    
       

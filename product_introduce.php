@@ -188,14 +188,43 @@ include 'nav_menu_banner.php';
   echo $current_product ['pro_description'];
   echo "</textarea>";
 
+  
+
+
+
+
+ 
+
 
   echo "</div>";
 
-  echo "</form>";
+
+  echo "<div class='col-md-9 col-lg-9 panel panel-danger product_des' style='height:100px;color:#888'>免责声明";
+
+
+  echo "<div class = 'form-control' rows='3' name='pro_des' style='border: none;resize: none;
+    outline: none;background-color: transparent;' >";
+
+  
+  echo "<font style='color:#888;'>本公司代理的保健品不能代替医生的诊断和治疗，有疾病和不适建议您应先寻求医生或健康专业人士的帮助。服用前，注意阅读有关说明，尤其是对怀孕，哺乳或食物过敏者的警告提示 。</font>";
+  echo "</div>";
+
+  
+
+
+
+
+ 
+
+
+  echo "</div>";
+
+
 
 
 
 ?>
+
 
     
  </div>

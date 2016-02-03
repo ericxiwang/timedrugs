@@ -95,9 +95,6 @@ Canada, V5H 2A9<br/><br/>
 Richmond, BC<br/>
 Canada, V6X 3Z8<br/><br/>
  
-好时光健康咨询中心<br/>
-#228 5780 Cambie Street（汇丰银行旁）<br/>
-Vancouver West，BC<br/><br/>
  
 北美免费电话：1.888.505.5676<br/>
 电话： 1.604.871.0178，1.604.568.9518<br/>
@@ -119,7 +116,39 @@ Vancouver West，BC<br/><br/>
 售后服务<br/>
 您可以任何时候发送邮件至邮箱，我们将竭诚为您提供快捷便利的服务，我们的服务时间段为:<br/>
 好时光保健药房网上商城客服邮箱: info@timedrugs.com<br/><br/>
+
+<div class='panel panel-danger' id='info'>
+
+<h5>用户信息保护</h5>
+<h5>所有的客户信息都通过安全的服务器，信息在加密后才会传输给我们。信用卡信息是通过使用一个安全服务器（SSL安全套接字层加密，网上安全交易标准）
+</h5>
 </div>
+
+<div class='panel panel-danger' id='privacy'>
+
+<h5>用户隐私政策</h5>
+<h5>Timedrugs.com尊重您的隐私权，并致力于保护它，您的信息不会被传递到第三方，除非您明确同意。
+如果你还不确定是否在互联网上发送您的信用卡详细信息。您还可以将您的订单信息以及付款方式发送邮件至info@timedrugs
+com，我们有客服人员为您服务。
+</h5>
+</div>
+<div class='panel panel-danger' id='return'>
+
+<h5>退货退款政策</h5>
+<h5>收到货物7天之内通过电子邮件向我们提出退换/退款申请，合理原因，本公司尽力配合顾客需要，但以下情况除外：<br/>
+1）来回邮寄费不能退还<br/>
+2）因所在国海关的扣查、没收、关税、罚款、延误等不属于退款之列<br/>
+3）请保持退回产品干净并包装完整未开封状态。联系邮件：info@timedrugs.com 。
+</h5>
+</div>
+
+
+
+</div>
+
+
+
+
 
 
 

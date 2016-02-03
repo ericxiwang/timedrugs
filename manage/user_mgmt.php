@@ -14,7 +14,8 @@ function user_mgmt(){
 global $db_connect;
 
 	if (!isset($_POST['submit_edit'])){
-		$user_list = "SELECT first_name,last_name,email,actived from user_info";
+		//$user_list = "SELECT first_name,last_name,email,actived from user_info";
+		$user_list = "SELECT first_name,last_name,email from user_info";
 
 		$user_list = mysqli_query($db_connect,$user_list);
 		echo "<table class='table table-condensed'>";
@@ -53,7 +54,7 @@ global $db_connect;
 
 		$index_email = $_POST['submit_edit'];
 		/////////////////////////////////////////// get user info ////////////////
-		$user_info = "SELECT first_name,last_name,email,actived from user_info where email = '$index_email'";
+		$user_info = "SELECT first_name,last_name,email from user_info where email = '$index_email'";
 
 		$user_info = mysqli_query($db_connect,$user_info);
 		$user_info = mysqli_fetch_assoc($user_info);
