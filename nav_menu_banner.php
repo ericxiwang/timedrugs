@@ -51,7 +51,12 @@ include 'db_cn.php';/////include basic DB connection , db name is inventory/////
 
           echo "<a href='user_order_list.php'><span class='glyphicon glyphicon-certificate'></span>&nbsp;".$current_user[1]."&nbsp;".$current_user[2]."您好,点击这里可查看订单状态</a>";
           echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
+          echo "<a href='user_modify.php'><span class='glyphicon glyphicon-cog'></span>&nbsp;&nbsp;用户信息修改</a>";
+          echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
           echo "<a href='user_logout.php'><span class='glyphicon glyphicon-circle-arrow-down'></span>&nbsp;&nbsp;用户登出</a>";
+
+          
 
         }
         elseif (!isset($_SESSION['user_account'])) {

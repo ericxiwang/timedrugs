@@ -18,7 +18,7 @@ table, th, td {
 </tr>
 %cart_list%
 <tr>
-	<td>商品总价
+	<td>订单总额
 	</td>
 	<td>
 	%ord_amount%

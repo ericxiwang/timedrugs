@@ -206,7 +206,7 @@ if (isset($_POST['check_order']))
 	$query_one_order = "SELECT pro_name,pro_img,pro_o_price,pro_m_price,pro_quantity,pro_amount,pro_pro_type FROM ord_product WHERE ord_uuid = '$pro_code'";
 	$query_one_order = mysqli_query($db_connect,$query_one_order);
 
-	$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status FROM ord_record WHERE ord_uuid ='$pro_code' ";
+	$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status,ord_shipping_method FROM ord_record WHERE ord_uuid ='$pro_code' ";
 	$order_basic_info = mysqli_query($db_connect,$order_basic_info);
 	$order_basic_info = mysqli_fetch_assoc($order_basic_info);
 
@@ -325,7 +325,8 @@ if (isset($_POST['check_order']))
 	echo "<tr><td>邮费:</td><td>$".$order_basic_info['ord_shipping_fee']."</td>";
 	echo "<td>订单总价:</td><td colspan=2>$".$order_basic_info['ord_amount']."</td></tr>";
 
-	echo "<tr><td>邮寄地址:</td><td colspan=4>".$order_basic_info['ord_address']."</td></tr>";
+	echo "<tr><td>邮寄地址:</td><td colspan=3>".$order_basic_info['ord_address']."</td>";
+	echo "<td>邮寄方式: ".$order_basic_info['ord_shipping_method']."</td></tr>";
 
 	echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
 	echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td>";
