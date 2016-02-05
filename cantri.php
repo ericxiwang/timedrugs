@@ -66,6 +66,6 @@ include 'list_all.php';
 <!--inventory row end-->
   
 </div>
-
+<?php include 'footer.php';?>
 </body>
 </html>

@@ -482,7 +482,7 @@ $total_price = number_format($total_price*(1+floatval($tax_shipping_display[0])/
 echo "</tr>";
 echo "<tr>";
 	echo "<td colspan=6 align=right>";
-	echo "订单总额（含税含运费）";
+	echo "订单总额（CAD,含税含运费）";
 	echo "<p id = 'final_pay' style='font-size:160%''></p>";
 	echo "<input name = 'hidden_amount' id = 'hidden_amount' type='hidden' value=''/>";
 	echo "</td>";

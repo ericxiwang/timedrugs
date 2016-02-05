@@ -102,7 +102,7 @@ foreach ($query_one_order as $single_product) {
 		echo "</td>";
 		echo "<td>";//产品总价
 			
-			echo $single_product['pro_amount'];
+			echo "$".$single_product['pro_amount'];
 		echo "</td>";
 
 		
@@ -114,7 +114,7 @@ foreach ($query_one_order as $single_product) {
 }
 ////////////product list end //////
 echo "<tr><td>邮费:</td><td>$".$order_basic_info['ord_shipping_fee']."</td>";
-echo "<td>订单总价:</td><td colspan=2>$".$order_basic_info['ord_amount']."</td></tr>";
+echo "<td>订单总价(CAD):</td><td colspan=2>$".$order_basic_info['ord_amount']."</td></tr>";
 
 echo "<tr><td>邮寄地址:</td><td colspan=4>".$order_basic_info['ord_address']."</td></tr>";
 

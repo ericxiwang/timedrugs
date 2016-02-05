@@ -4,7 +4,7 @@ include 'nav_menu_banner.php';
 ?>
     <!--nav end -->
    
-      <div class="col-md-9 col-lg-9 panel panel-danger product_list" >
+<div class="col-md-9 col-lg-9 panel panel-danger product_list" >
 
 
 <div class='panel panel-success' align="center"><font size=5>订购指南</font></div>
@@ -61,7 +61,7 @@ include 'nav_menu_banner.php';
 					邮政或专递
 					</td>
 					<td>
-					7-12个工作日
+					7-14个工作日
 					</td>
 					<td>
 					结帐自动计算或电邮查询
@@ -75,9 +75,9 @@ include 'nav_menu_banner.php';
 
 <div>注：<br/>
 1、配送时间为在清关正常的情况下从快递取件后的第二个工作日开始计算<br/>
-2、其他地区请电邮查询<br/>
-3、因邮费和寄送天数会变化，以当日查询好时光报价为准。<br/>
-4、任何因收货国征收关税的程序耽误，好时光将不予承担由此带来的时间和经济上的损失。<br/><br/>
+2、其他地区请电邮查询，因圣诞节，中国春节期间，运送有可能延误。<br/>
+3、因邮费和寄送达时间会变化，以当日邮件查询好时光报价为准。。<br/>
+4、任何因收货国征收关税或扣押检查引起耽误，好时光将不承担由此带来的时间和经济上的损失。<br/><br/>
 
 </div>
 <hr>
@@ -165,5 +165,7 @@ com，我们有客服人员为您服务。
   
 </div>
 
+
 </body>
+
 </html>
