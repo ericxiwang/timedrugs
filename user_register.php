@@ -1,5 +1,6 @@
 <?php
 include 'nav_menu_banner.php';
+
 ?>
 
 <?php
@@ -34,8 +35,12 @@ if (isset($_POST['email']))	{// if POST already has data , do user authorize pro
 else{ // if POST is not set, that means nothing to do, just draw form
 	
 	
+	}
 }
-}
+
+
+
+
 function insert_to_db(){
 
 global $db_connect;
@@ -88,6 +93,10 @@ $insert_user_extra_info = mysqli_query($db_connect,$user_extra_db);
 
 
 if(mysqli_affected_rows($db_connect) == 1){//if data was inserted successfully
+	
+	include ('sign_up_mail.php');
+	sign_up_mail($user_email,$psw_encrypt,$first_name,$last_name);
+
 
 
 #header( 'Location: user_authorized.php' );
