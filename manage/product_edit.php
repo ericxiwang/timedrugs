@@ -46,6 +46,7 @@ function pro_update()
 		$pro_img		=	$_POST['img_code'];
 		$pro_onsell		=	$_POST['pro_onsell'];
 		$pro_des 		= 	$_POST['pro_des'];
+		$pro_keyword	=	$_POST['pro_keyword'];
 
 		//echo "@".$pro_name."@".$pro_o_price."@".$pro_o_price."@".$pro_brand."@".$pro_weight."@".$pro_category."@".$pro_spec;
 
@@ -73,7 +74,8 @@ function pro_update()
 							pro_weight 		= '$pro_weight',
 							pro_spec 		= '$pro_spec',
 							pro_onsell 		= '$pro_onsell',
-							pro_description = '$pro_des'
+							pro_description = '$pro_des',
+							pro_keyword		= '$pro_keyword'
 
 							WHERE pro_code='$pro_code'";
 
@@ -212,7 +214,7 @@ function load_page(){
 
 		$pro_code = $_POST['pro_edit'];
 		////////////////////////////////////////// get main info from product info table /////////////////////////////////////////////
-		$edit_pro = "SELECT pro_img,pro_name,pro_brand,pro_category,pro_o_price,pro_weight,pro_spec,pro_description,pro_onsell from product_info where pro_code = '$pro_code'";
+		$edit_pro = "SELECT pro_img,pro_name,pro_brand,pro_category,pro_o_price,pro_weight,pro_spec,pro_keyword,pro_description,pro_onsell from product_info where pro_code = '$pro_code'";
 		$edit_pro = mysqli_query($db_connect,$edit_pro);
 		$edit_pro = mysqli_fetch_assoc($edit_pro);
 
@@ -228,6 +230,7 @@ function load_page(){
 
 		echo "<div class = 'form-group col-lg-5'>";
 		echo "<label>产品名称:</label><input class='form-control' type=text name='pro_name' value='$edit_pro[pro_name]'>";
+		echo "<label>产品关键字:</label><input class='form-control' type=text name='pro_keyword' value='$edit_pro[pro_keyword]'>";
 
 
 		///////////////////////// draw brand checkbox list ////////////////////

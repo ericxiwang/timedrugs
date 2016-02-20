@@ -121,11 +121,11 @@ echo "<tr><td>邮寄地址:</td><td colspan=4>".$order_basic_info['ord_address']
 echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
 echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td></tr>";
 
-if ($order_basic_info['ord_shipping_method'] = 'extra'){
+if ($order_basic_info['ord_shipping_method'] == 'extra'){
 	echo"<tr><td>邮寄方式:</td><td>"."特快专递"."</td>";
 
 }
-elseif($order_basic_info['ord_shipping_method'] = 'common'){
+elseif($order_basic_info['ord_shipping_method'] == 'common'){
 
 	echo"<tr><td>邮寄方式:</td><td>"."普通平邮"."</td>";
 }

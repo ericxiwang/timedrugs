@@ -358,7 +358,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 
 	
 
-			$user_country = $user_country_input;
+			//$user_country = $simple;
 			$tax_shipping_display = $tax_shipping_display_input;
 
 			foreach ($tax_shipping_display as $shipping_method) 
@@ -416,7 +416,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 	}
 
 }
-if ($query_user['user_country'] = "Canada") {
+if ($query_user['user_country'] == "Canada") {
 	echo "</td><td>";
 	draw_radio('Canada',$tax_shipping_display[1],$total_weight);
 
@@ -424,14 +424,14 @@ if ($query_user['user_country'] = "Canada") {
 }
 
 
-elseif($query_user['user_country'] = "China"){
+elseif($query_user['user_country'] == "China"){
 	//echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
 	echo "</td><td>";
 	draw_radio('China',$tax_shipping_display[1],$total_weight);
 
 	echo "</td>";
 }
-elseif($query_user['user_country'] = "USA"){
+elseif($query_user['user_country'] == "USA"){
 	//echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
 	echo "</td><td>";
 	draw_radio('USA',$tax_shipping_display[1],$total_weight);

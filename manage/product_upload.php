@@ -51,6 +51,7 @@ $load_category = mysqli_query($db_connect,$load_category);
 		产品单价:<input class="form-control" type='text' name = 'pro_o_price'>
 		产品重量:<input class="form-control" type='text' name = 'pro_weight'>
 		产品规格:<input class="form-control" type='text' name = 'pro_spec'>
+		产品关键字:<input class="form-control" type='text' name = 'pro_keyword'>
 		产品描述:<textarea class = 'form-control' rows="5" name='pro_des'></textarea>
 		<div class="checkbox">
   			<label><input name='pro_onsell' type="checkbox" value=1 checked>在线销售 </label>
@@ -91,6 +92,7 @@ function pro_upload()
 			$pro_o_price = $_POST['pro_o_price'];
 			$pro_weight = $_POST['pro_weight'];
 			$pro_spec = $_POST['pro_spec'];
+			$pro_keyword = $_POST['pro_keyword'];
 
 			if (isset($_POST['pro_onsell']))
 				{
@@ -155,8 +157,8 @@ function pro_upload()
         		echo $pro_brand;
 
 
-        		$query_add_pro = "INSERT INTO product_info (pro_name,pro_brand,pro_code,pro_img,pro_category,pro_o_price,pro_weight,pro_spec,pro_description,pro_onsell,whole_sale) 
-        						VALUES ('$pro_name','$pro_brand','$UU_ID','$path_to_db','$pro_category','$pro_o_price','$pro_weight','$pro_spec','$pro_des','$pro_onsell','$pro_wholesell')";
+        		$query_add_pro = "INSERT INTO product_info (pro_name,pro_brand,pro_code,pro_img,pro_category,pro_o_price,pro_weight,pro_spec,pro_keyword,pro_description,pro_onsell,whole_sale) 
+        						VALUES ('$pro_name','$pro_brand','$UU_ID','$path_to_db','$pro_category','$pro_o_price','$pro_weight','$pro_spec','$pro_keyword','$pro_des','$pro_onsell','$pro_wholesell')";
 
 
         		//$query_add_pro = "INSERT INTO product_info (pro_name,pro_brand,pro_code,pro_img) VALUES ('$pro_name','$pro_brand','$UU_ID','$target_file')";

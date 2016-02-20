@@ -12,7 +12,7 @@ include 'promotion_function.php';
      if ((isset($search_result)) and ($search_result != ""))
      {
 
-     $query_search  = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where pro_name like '%$search_result%'";
+     $query_search  = "SELECT pro_name,pro_img,pro_o_price,pro_code,promotion_enabled,promotion_id from product_info where pro_name like '%$search_result%' or pro_keyword like '%$search_result%'";
      $query_search = mysqli_query($db_connect,$query_search);
 
      $search_count = mysqli_num_rows($query_search);

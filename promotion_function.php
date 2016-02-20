@@ -7,7 +7,7 @@ foreach ($all_products as $all_cursor){
 	global $db_connect;
 
       echo "<div class='col-md-3 col-lg-3 panel panel-danger inventory'>";
-      echo "<img class='img-thumbnail preview-pic' src='$all_cursor[pro_img]'/>";
+      echo "<a href ='product_introduce.php?id=$all_cursor[pro_code]'><img class='img-thumbnail preview-pic' src='$all_cursor[pro_img]'/></a>";
 
       echo "<p>".$all_cursor['pro_name']."</p>";
 
@@ -62,7 +62,7 @@ foreach ($all_products as $all_cursor){
       echo "<p>&nbsp;</p>";
       }
 
-      echo "<a href='product_introduce.php?id=$all_cursor[pro_code]' role='button' class='btn btn-warning'>在线订购</a>
+      echo "<a href='product_introduce.php?id=$all_cursor[pro_code]' role='button' class='btn btn-warning'>点击详情</a>
 
             </div>";
 
