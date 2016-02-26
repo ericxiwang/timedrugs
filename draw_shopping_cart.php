@@ -377,7 +377,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 
 					}
 					else if ($total_weight > 1){
-						$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];//////普通平邮邮费计算
+						$shipping_fee_option = $shipping_method['shipping_basefee'] + ceil(($total_weight-1))*$shipping_method['shipping_extrafee'];//////普通平邮邮费计算
 				
 
 
@@ -405,7 +405,7 @@ function draw_radio($user_country_input,$tax_shipping_display_input,$total_weigh
 					}
 					else if ($total_weight > 1)
 					{
-						$shipping_fee_option = $shipping_method['shipping_basefee'] + ($total_weight-1)*$shipping_method['shipping_extrafee'];/////特快专递邮费计算
+						$shipping_fee_option = $shipping_method['shipping_basefee'] + ceil(($total_weight-1))*$shipping_method['shipping_extrafee'];/////特快专递邮费计算
 
 					}
 				echo "<input type='radio' onClick='final_amount()' id ='extra' name = 'shipping_fee' value='$shipping_fee_option'>特快专递 $ ".$shipping_fee_option;
@@ -438,6 +438,14 @@ elseif($query_user['user_country'] == "USA"){
 
 		echo "</td>";
 	}
+else
+{
+	echo "</td><td>";
+	draw_radio('other',$tax_shipping_display[1],$total_weight);
+
+
+
+}
 
 	/*elseif($query_user['user_country'] == 'other'){
 		echo "<td colspan=4 style='text-align:right'>商品寄送方式:<br/> ";
@@ -466,12 +474,12 @@ elseif($query_user['user_country'] == "USA"){
 	echo "</td>";
 }
 */
-else
+/*else
 {
 	echo "error!";
 	echo $query_user['user_country'];
 }
-
+*/
 echo "</tr>";
 
 $total_price = number_format($total_price*(1+floatval($tax_shipping_display[0])/100),1);

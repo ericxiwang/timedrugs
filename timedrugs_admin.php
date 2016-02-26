@@ -11,8 +11,8 @@
   </head>
 
 <body >
-
-
+<div class='container'>
+<div class='row'>
 
 <div class='col-md-9 col-lg-9 panel panel-danger product_list' style='float:center;padding-top:15px;'>
 
@@ -62,6 +62,8 @@ else
 
 ?>
 
+</div>
+</div>
 </div>
 </body>
 

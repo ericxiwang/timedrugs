@@ -162,9 +162,11 @@ elseif (mysqli_affected_rows($db_connect) == 0) {
 	      	<label class="control-label col-sm-2" for="email">国家:</label>
 	      	<div class="col-md-4">
 		        <select type="se" class="form-control" id="user_country" name='user_country'>
+		        	<option value='China'>中国大陆</option>
 		        	<option value='Canada'>加拿大</option>
-		        	<option value='China'>中国</option>
+		        	
 		        	<option value='USA'>美国</option>
+		        	<option value='other'>其它</option>
 		        	<!--<option value='other'>其它</option>-->
 		        	
 		        </select>
