@@ -54,7 +54,7 @@ $ord_user   =   $ord_info[2];
   echo "<input type='hidden' name='item_number' value='1'>";
   echo "<input type='hidden' name='amount' value='$ord_amount'>";
   echo "<input type='hidden' name='custom' value='wang'>";
-  echo "<input type='hidden' name='invoice' value='enabled'>";
+  //echo "<input type='hidden' name='invoice' value='enabled'>";
   echo "<input type='hidden' name='no_shipping' value='1'> "; 
   echo "<input type='hidden' name='currency_code' value='CAD'>";
   echo "<input type='hidden' name='no_note' value='1'>";
