@@ -206,9 +206,16 @@ if (isset($_POST['check_order']))
 	$query_one_order = "SELECT pro_name,pro_img,pro_o_price,pro_m_price,pro_quantity,pro_amount,pro_pro_type FROM ord_product WHERE ord_uuid = '$pro_code'";
 	$query_one_order = mysqli_query($db_connect,$query_one_order);
 
-	$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status,ord_shipping_method FROM ord_record WHERE ord_uuid ='$pro_code' ";
+	$order_basic_info = "SELECT ord_address,ord_amount,ord_postcode,ord_user,ord_shipping_fee,ord_status,ord_shipping_method,ord_email FROM ord_record WHERE ord_uuid ='$pro_code' ";
 	$order_basic_info = mysqli_query($db_connect,$order_basic_info);
 	$order_basic_info = mysqli_fetch_assoc($order_basic_info);
+
+	$current_user_email = $order_basic_info['ord_email'];
+	$order_user_info = "SELECT user_phone from user_extra_info where user_email = '$current_user_email' ";
+	$order_user_info = mysqli_query($db_connect,$order_user_info);
+	$order_user_info = mysqli_fetch_assoc($order_user_info);
+	
+
 
 
 	echo "<input name = 'ord_id' type='hidden' value = '$pro_code'>";
@@ -330,6 +337,10 @@ if (isset($_POST['check_order']))
 
 	echo "<tr><td>邮编:</td><td>".$order_basic_info['ord_postcode']."</td>";
 	echo "<td>收件人:</td><td colspan=2>".$order_basic_info['ord_user']."</td>";
+
+	echo "<tr><td>电子邮件:</td><td>".$order_basic_info['ord_email']."</td>";
+
+	echo "<td>联系电话:</td><td colspan=2>".$order_user_info['user_phone']."</td></tr>";
 
 	echo "</table>";
 	echo "<div class='text-center'>";
